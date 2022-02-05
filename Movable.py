@@ -12,12 +12,14 @@ class Movable:
         self._type = null
    
     def draw(self):
-        win.blit(self.img)
+        win.blit(self.img, (self.x, self.y))
 
     def notifyIsHit(self, movable):
+        println("Implement later")
         # Implement later
 
     def remove(self):
+        println("Implement later")
         # Implement later
 
     # Some children classes will override this
@@ -26,10 +28,10 @@ class Movable:
         self.y += self.dy
 
     # -------------------------------------------
-    # Getter's and Setter's
+    # Getters and Setters
     # -------------------------------------------
     @property
-        def x(self):
+    def x(self):
         return self._x
     @x.setter
     def x(self, t_x):
@@ -39,7 +41,7 @@ class Movable:
     def y(self):
         return self._y
     @y.setter
-    def x(self, t_y):
+    def y(self, t_y):
         self._y = t_y
 
     @property
