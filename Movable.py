@@ -64,3 +64,8 @@ class Movable:
 
     def remove(self):
         # Implement later
+
+    # Some children classes will override this
+    def move(self):
+        self.x += self.dx
+        self.y += self.dy
