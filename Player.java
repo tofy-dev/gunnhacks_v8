@@ -90,7 +90,8 @@ public class Player extends Movable implements KeyListener {
 	
 	public boolean isMoving() {
 		//System.out.println(isDownPressed() || isUpPressed() || isLeftPressed() || isRightPressed());
-		return isDownPressed() || isUpPressed() || isLeftPressed() || isRightPressed();
+		//return isDownPressed() || isUpPressed() || isLeftPressed() || isRightPressed();
+		return isUpPressed();
 	}
 
 	@Override
@@ -101,7 +102,6 @@ public class Player extends Movable implements KeyListener {
 			setDx(getDx()/2);
 			setDy(getDy()/2);
 		}
-
 		// System.out.println("dx: " + getDx() + ", dy: " + getDy());
 
 		setX(getX() + getDx());
