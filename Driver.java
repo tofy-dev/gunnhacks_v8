@@ -78,6 +78,7 @@ public class Driver {
 			}
 			panel.repaint();
 		}
+		drawGameOver(g2);
 	}
 
 	public static class Panel extends JPanel {
@@ -96,6 +97,7 @@ public class Driver {
 				manageLasers(g);
 
 				x += 5;
+			}else {
 			}
 
 		}
@@ -135,7 +137,7 @@ public class Driver {
 		}
 		if (player.isRightPressed()) {
 			player.setdir(player.getdir() + 0.1);
-			;
+			
 		}
 	}
 
@@ -159,6 +161,12 @@ public class Driver {
 		// Possibly add Special effect?
 		player.setX(panel.getWidth() / 2 - player.getWidth() / 2);
 		player.setY(panel.getHeight() / 2 - player.getHeight() / 2);
+	}
+	
+	public static void drawGameOver(Graphics2D g) {
+		g.setColor(Color.GREEN);
+		g.setFont(new Font("Times", Font.BOLD, 80));
+		g.drawString("GAME OVER", 100, 350);
 	}
 
 }

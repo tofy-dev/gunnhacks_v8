@@ -25,6 +25,11 @@ public class Player extends Movable implements KeyListener {
 	private boolean leftPressed = false;
 	private boolean rightPressed = false;
 	private long cooldown = System.currentTimeMillis();
+	private double acceleration = 0.25;
+	private double deacceleration = 0.1;
+	
+	private final double DEFAULT_ACCELERATION = 0.25;
+	private final double DEFAULT_DEACCELERATION = 0.1;
 	
 	public Player(int tx, int ty, int width, int height, int speed, JPanel panel) {
 		super(tx, ty, (int) (Math.cos(0) * speed), (int) (Math.sin(0) * speed), width, height, panel);
@@ -97,9 +102,12 @@ public class Player extends Movable implements KeyListener {
 	@Override
 	public void move() {
 		if(isMoving() && speed<20) {
-			speed+=0.25;
+			speed+=acceleration;
+			acceleration += 0.0001;
+			deacceleration = DEFAULT_DEACCELERATION;
 		}else if(speed>0.25){
-			speed-=0.05;
+			speed-=deacceleration;
+			acceleration = DEFAULT_ACCELERATION;
 		}
 		setDx((int) (Math.cos(dir - Math.PI / 2) * speed));
 		setDy((int) (Math.sin(dir - Math.PI / 2) * speed));
