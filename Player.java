@@ -288,10 +288,10 @@ public class Player extends Movable implements KeyListener {
 				deacceleration *= 0.5;
 				int nx, ny;
 				if (Math.abs(getDx())<1) {
-					nx = getX() + (int) (2 * Math.cos(Math.PI + tDir));
+					nx = getX() + (int) (5 * Math.cos(Math.PI + tDir));
 					setX(nx);
 				}else if(Math.abs(getDy())<1) {
-					ny = getY() + (int) (2 * Math.sin(Math.PI +tDir));
+					ny = getY() + (int) (5 * Math.sin(Math.PI +tDir));
 					setY(ny);
 				}
 			}
