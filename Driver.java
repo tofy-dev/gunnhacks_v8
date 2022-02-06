@@ -14,7 +14,10 @@ public class Driver {
 	private static ArrayList<Asteroids> asteroids;
 	private static ArrayList<Laser> lasers;
 	private static Player player;
-	private static boolean isGameOver;
+	private static boolean isGameOver = false;
+	private static boolean spawnOnce = true;
+
+	private static long astCooldown = System.currentTimeMillis();
 
 	public static void main(String[] args) {
 
@@ -23,7 +26,7 @@ public class Driver {
 		frame.setBounds(0, 0, 700, 700);
 
 		panel = new Panel();
-		//panel.setBackground(Color.GRAY);
+		// panel.setBackground(Color.GRAY);
 
 		panel.setLayout(null);
 
@@ -48,19 +51,6 @@ public class Driver {
 		g.setColor(Color.BLACK);
 
 		asteroids = new ArrayList<Asteroids>();
-		for (int i = 0; i < 5; i++) {
-			int speedx = (int) (Math.random() * 8) - 4;
-			if (speedx == 0) {
-				speedx = 1;
-			}
-			int speedy = (int) (Math.random() * 8) - 4;
-			if (speedy == 0) {
-				speedy = 1;
-			}
-			int size = (int) (Math.random() * 30) + 20;
-			asteroids.add(new Asteroids((int) (Math.random() * panel.getWidth()),
-					(int) (Math.random() * panel.getHeight()), speedx, speedy, size, panel));
-		}
 		lasers = new ArrayList<Laser>();
 
 		player = new Player(350, 600, 50, 50, 5, panel);
@@ -86,9 +76,17 @@ public class Driver {
 		private int x = 5;
 
 		protected void paintComponent(Graphics g) {
+			if(asteroids != null && asteroids.size() <= 1) {
+				spawnAsteroids();
+			}
+			if(spawnOnce && System.currentTimeMillis() - astCooldown >= 1000) {
+				spawnOnce = false;
+				spawnAsteroids();
+			}
 			if (!isGameOver) {
 				super.paintComponent(g);
-				g.drawImage(new ImageIcon("sprites/background.jpg").getImage(), 0, 0, panel.getWidth(), panel.getHeight(), null);
+				g.drawImage(new ImageIcon("sprites/background.jpg").getImage(), 0, 0, panel.getWidth(),
+						panel.getHeight(), null);
 				// g.setColor(Color.RED);
 				if (player != null && player.getLives() <= 0) {
 					setGameOver(true);
@@ -98,7 +96,7 @@ public class Driver {
 				manageLasers(g);
 
 				x += 5;
-			}else {
+			} else {
 			}
 
 		}
@@ -127,9 +125,9 @@ public class Driver {
 		player.draw(g);
 
 		player.move();
-		//if (player.isUpPressed()) {
-			//player.move();
-		//}
+		// if (player.isUpPressed()) {
+		// player.move();
+		// }
 		if (player.isDownPressed()) {
 			player.shoot();
 		}
@@ -138,7 +136,7 @@ public class Driver {
 		}
 		if (player.isRightPressed()) {
 			player.setdir(player.getdir() + 0.1);
-			
+
 		}
 	}
 
@@ -163,11 +161,26 @@ public class Driver {
 		player.setX(panel.getWidth() / 2 - player.getWidth() / 2);
 		player.setY(panel.getHeight() / 2 - player.getHeight() / 2);
 	}
-	
+
 	public static void drawGameOver(Graphics2D g) {
 		g.setColor(Color.GREEN);
 		g.setFont(new Font("Times", Font.BOLD, 80));
 		g.drawString("GAME OVER", 100, 350);
 	}
 
+	public static void spawnAsteroids() {
+		for (int i = 0; i < 6; i++) {
+			int speedx = (int) (Math.random() * 8) - 4;
+			if (speedx == 0) {
+				speedx = 1;
+			}
+			int speedy = (int) (Math.random() * 8) - 4;
+			if (speedy == 0) {
+				speedy = 1;
+			}
+			int size = (int) (Math.random() * 20) + 10;
+			asteroids.add(new Asteroids((int) (Math.random() * panel.getWidth()),
+					(int) (Math.random() * panel.getHeight()), speedx, speedy, size, panel));
+		}
+	}
 }
