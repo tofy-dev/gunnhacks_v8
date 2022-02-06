@@ -59,7 +59,7 @@ public class Asteroids extends Movable{
 	}
 	
 	public void createCoin() {
-		Coin coin = new Coin(getX(), getY(), 0, 0, 10, 20, getPanel());
+		Coin coin = new Coin(getX(), getY(), getDx()/2, getDy()/2, 10, 20, getPanel());
 		Driver.getCoins().add(coin);
 	}
 	

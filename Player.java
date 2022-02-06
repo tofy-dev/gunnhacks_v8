@@ -139,6 +139,7 @@ public class Player extends Movable implements KeyListener {
 			deacceleration = DEFAULT_DEACCELERATION;
 		}else if(speed>0.25){
 			speed-=deacceleration;
+			deacceleration += 0.001;
 			acceleration = DEFAULT_ACCELERATION;
 		}
 		setDx((int) (Math.cos(dir - Math.PI / 2) * speed));
@@ -281,9 +282,18 @@ public class Player extends Movable implements KeyListener {
 			int r = getWidth() / 2;
 
 			double tDir = dir - Math.PI / 2;
-			if (!upPressed) {
-				setX(getX() - getDx());
-				setY(getY() - getDy());
+			if (upPressed) {
+				acceleration -= 0.001;
+			}else {
+				deacceleration *= 0.5;
+				int nx, ny;
+				if (Math.abs(getDx())<1) {
+					nx = getX() + (int) (2 * Math.cos(Math.PI + tDir));
+					setX(nx);
+				}else if(Math.abs(getDy())<1) {
+					ny = getY() + (int) (2 * Math.sin(Math.PI +tDir));
+					setY(ny);
+				}
 			}
 			int nX = getX() + getWidth() / 2 + (int) (r * Math.cos(tDir));
 			int nY = getY() + getHeight() / 2 + (int) (r * Math.sin(tDir));
