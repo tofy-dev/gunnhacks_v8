@@ -182,7 +182,7 @@ public class Player extends Movable implements KeyListener {
 			currentImage = hurtImage;
 			hurtCount++;
 		}
-		if(hurtCount>50) {
+		if(hurtCount>100) {
 			hurtCount = 0;
 			isHurting = false;
 		}
