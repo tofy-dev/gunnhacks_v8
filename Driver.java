@@ -13,6 +13,7 @@ public class Driver{
 	private static Graphics g;
 	
 	private static ArrayList<Asteroids> asteroids;
+	private static ArrayList<Laser> lasers;
 	private static Player player;
 	
 	
@@ -51,6 +52,8 @@ public class Driver{
 		
 		asteroids = new ArrayList<Asteroids>();
 		asteroids.add(new Asteroids(100, 100, 1, -2, 50, panel));
+		
+		lasers = new ArrayList<Laser>();
 		
 		
 		player = new Player(350, 600, 50, 50, 5, panel);
@@ -109,9 +112,21 @@ public class Driver{
 		return asteroids;
 	}
 	
+	public static ArrayList<Laser> getLasers(){
+		return lasers;
+	}
+	
 	public static void managePlayer(Graphics g) {
 		if(player==null) return;
 		player.draw(g);
+	}
+	
+	public static void manageLasers(Graphics g) {
+		if(lasers==null) return;
+		for(int i = 0; i<lasers.size(); i++) {
+			lasers.get(i).draw(g);
+			lasers.get(i).move();
+		}
 	}
 
 }

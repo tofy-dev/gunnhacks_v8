@@ -94,18 +94,18 @@ public class Player extends Movable implements KeyListener{
 		setX(getX() + getDx());
 		setY(getY() + getDy());
 		if(getX() < -getWidth()/4) {
-			setX(getPanel().getWidth() + getWidth()/4);
+			setX(getPanel().getWidth() + getWidth());
 			System.out.println("1");
 		}
 		if(getY() < -getHeight()/4) {
-			setY(getPanel().getHeight() + getHeight()/4);
+			setY(getPanel().getHeight() + getHeight());
 			System.out.println("2");
 		}
-		if(getX() > getPanel().getWidth() + getWidth()/4) {
+		if(getX() > getPanel().getWidth() + getWidth()) {
 			setX( -getWidth()/4);
 			System.out.println("3");
 		}
-		if(getY() > getPanel().getHeight() + getHeight()/4) {
+		if(getY() > getPanel().getHeight() + getHeight()) {
 			setY( -getHeight()/4);
 			System.out.println("4");
 		}
@@ -113,11 +113,13 @@ public class Player extends Movable implements KeyListener{
 		
 		getHitBox().setLocation(getX(), getY());
 		ArrayList<Asteroids> asteroids = Driver.getAsteroids();
+		Asteroids temp;
 		for(int i = 0; i<asteroids.size(); i++) {
-			if(getHitBox().contains(asteroids.get(i).getHitBox())) {
-				System.out.println("sdf");
-				asteroids.get(i).notifyIfHit(this);
-				wasHit(asteroids.get(i));
+			if(getHitBox().intersects(asteroids.get(i).getHitBox())) {
+				temp = asteroids.get(i);
+				//System.out.println("sdf");
+				temp.notifyIfHit(this);
+				wasHit(temp);
 			}
 		}
 	}
@@ -184,7 +186,7 @@ public class Player extends Movable implements KeyListener{
 	}
 	
 	public void shoot() {
-		// Implement
+		Driver.getLasers().add(new Laser(getX(), getY(), 10, 5, dir, 8, getPanel()));
 	}
 	
 	/*
