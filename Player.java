@@ -74,32 +74,32 @@ public class Player extends Movable implements KeyListener{
 		
 		setX(getX() + getDx());
 		setY(getY() + getDy());
-//		if(getX() < -getWidth()/4) {
-//			setX(getPanel().getWidth() + getWidth()/4);
-//			System.out.println("1");
-//		}
-//		if(getY() < -getHeight()/4) {
-//			setY(getPanel().getHeight() + getHeight()/4);
-//			System.out.println("2");
-//		}
-//		if(getX() > getPanel().getWidth() + getWidth()/4) {
-//			setX( -getWidth()/4);
-//			System.out.println("3");
-//		}
-//		if(getY() > getPanel().getHeight() + getHeight()/4) {
-//			setY( -getHeight()/4);
-//			System.out.println("4");
-//		}
-//		
-//		
-//		getHitBox().setLocation(getX(), getY());
-//		ArrayList<Asteroids> asteroids = Driver.getAsteroids();
-//		for(int i = 0; i<asteroids.size(); i++) {
-//			if(getHitBox().contains(asteroids.get(i).getHitBox())) {
-//				asteroids.get(i).notifyIfHit(this);
-//				wasHit(asteroids.get(i));
-//			}
-//		}
+		if(getX() < -getWidth()/4) {
+			setX(getPanel().getWidth() + getWidth()/4);
+			System.out.println("1");
+		}
+		if(getY() < -getHeight()/4) {
+			setY(getPanel().getHeight() + getHeight()/4);
+			System.out.println("2");
+		}
+		if(getX() > getPanel().getWidth() + getWidth()/4) {
+			setX( -getWidth()/4);
+			System.out.println("3");
+		}
+		if(getY() > getPanel().getHeight() + getHeight()/4) {
+			setY( -getHeight()/4);
+			System.out.println("4");
+		}
+		
+		
+		getHitBox().setLocation(getX(), getY());
+		ArrayList<Asteroids> asteroids = Driver.getAsteroids();
+		for(int i = 0; i<asteroids.size(); i++) {
+			if(getHitBox().contains(asteroids.get(i).getHitBox())) {
+				asteroids.get(i).notifyIfHit(this);
+				wasHit(asteroids.get(i));
+			}
+		}
 	}
 
 	@Override
