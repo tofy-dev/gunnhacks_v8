@@ -1,8 +1,11 @@
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
+import java.awt.image.ImageFilter;
+import java.awt.image.RGBImageFilter;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -18,7 +21,9 @@ public class Player extends Movable implements KeyListener {
 	private int numLives = 3;
 
 	private Graphics2D g2;
-	private BufferedImage image;
+	private BufferedImage normalImage;
+	private BufferedImage currentImage;
+	private BufferedImage hurtImage;
 
 	private boolean upPressed = false;
 	private boolean downPressed = false;
@@ -27,6 +32,9 @@ public class Player extends Movable implements KeyListener {
 	private long cooldown = System.currentTimeMillis();
 	private double acceleration = 0.25;
 	private double deacceleration = 0.1;
+	
+	private int hurtCount = 0;
+	private boolean isHurting = false;
 	
 	private final double DEFAULT_ACCELERATION = 0.25;
 	private final double DEFAULT_DEACCELERATION = 0.1;
@@ -37,12 +45,29 @@ public class Player extends Movable implements KeyListener {
 		this.speed = speed;
 
 		try {
-			image = ImageIO.read(new File("sprites/player.png"));
-			g2 = image.createGraphics();
+			normalImage = ImageIO.read(new File("sprites/player.png"));
+			g2 = normalImage.createGraphics();
+			hurtImage = normalImage;
+//			for(int i = 0; i<hurtImage.getWidth(); i++) {
+//				for(int j = 0; i<hurtImage.getHeight(); i++) {
+//					int pixel = hurtImage.getRGB(i, j);
+//					Color c = new Color(pixel, true);
+//					int r = c.getRed();
+//					int g = c.getGreen();
+//					int b = c.getBlue();
+//					int a = c.getAlpha();
+//					Color nC= new Color(50, g, b, a);
+//					hurtImage.setRGB(i, j, nC.getRGB());
+//				}
+//			}
+//			currentImage = hurtImage;
+			currentImage = normalImage;
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		isHurting = true;
 
 	}
 
@@ -88,6 +113,7 @@ public class Player extends Movable implements KeyListener {
 		if (!hitter.getClass().equals(Laser.class)) {
 			numLives--;
 			Driver.lostLife();
+			isHurting = true;
 			// flashing maybe?, or remove, wait 0.5 seconds, and then reappear?
 		}
 
@@ -152,15 +178,16 @@ public class Player extends Movable implements KeyListener {
 
 	@Override
 	public void draw(Graphics g) {
+		//if()
 		double sin = Math.abs(Math.sin(Math.toRadians(dir)));
 		double cos = Math.abs(Math.cos(Math.toRadians(dir)));
-		int rW = (int) Math.floor(image.getWidth() * cos + image.getHeight() * sin);
-		int rH = (int) Math.floor(image.getHeight() * cos + image.getWidth() * sin);
-		BufferedImage rotated = new BufferedImage(rW, rH, image.getType());
+		int rW = (int) Math.floor(currentImage.getWidth() * cos + currentImage.getHeight() * sin);
+		int rH = (int) Math.floor(currentImage.getHeight() * cos + currentImage.getWidth() * sin);
+		BufferedImage rotated = new BufferedImage(rW, rH, currentImage.getType());
 		g2 = rotated.createGraphics();
-		g2.translate((rW - image.getWidth()) / 2, (rH - image.getHeight()) / 2);
-		g2.rotate(dir, image.getWidth() / 2, image.getHeight() / 2);
-		g2.drawRenderedImage(image, null);
+		g2.translate((rW - currentImage.getWidth()) / 2, (rH - currentImage.getHeight()) / 2);
+		g2.rotate(dir, currentImage.getWidth() / 2, currentImage.getHeight() / 2);
+		g2.drawRenderedImage(currentImage, null);
 		g2.dispose();
 		// g.drawImage(new ImageIcon("sprites/player.png").getImage(), getX(), getY(),
 		// (int)getHitBox().getWidth(), (int)getHitBox().getHeight(), null);
@@ -240,5 +267,6 @@ public class Player extends Movable implements KeyListener {
 	 * dir+=0.1; } else if(typed==KeyEvent.VK_DOWN) { shoot(); }else
 	 * if(typed==KeyEvent.VK_UP) { move(); } }
 	 */
+
 
 }
