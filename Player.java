@@ -21,9 +21,7 @@ public class Player extends Movable implements KeyListener{
 	private BufferedImage image;
 	
 	public Player(int tx, int ty, int width, int height, int speed, JPanel panel) {
-		super(tx, ty, (int) (Math.sqrt((speed*speed)/(1+Math.tan(Math.PI/2)*Math.tan(Math.PI/2)))), 
-				(int) ((Math.sqrt((speed*speed)/(1+Math.tan(Math.PI/2)*Math.tan(Math.PI/2)))*Math.tan(Math.PI/2))), 
-				width, height, panel);
+		super(tx, ty, (int) (Math.cos(0)*speed), (int)(Math.sin(0)*speed), width, height, panel);
 		this.dir = Math.PI/2;
 		this.speed = speed;
 		
@@ -69,39 +67,39 @@ public class Player extends Movable implements KeyListener{
 	
 	@Override
 	public void move() {
-		setDx((int) (Math.sqrt((speed*speed)/(1+Math.tan(dir)*Math.tan(dir)))));
-		setDy((int) ((Math.sqrt((speed*speed)/(1+Math.tan(dir)*Math.tan(dir)))*Math.tan(dir))));
+		setDx((int) (Math.cos(dir)*speed));
+		setDy((int) (Math.sin(dir)*speed));
 		
 		System.out.println("dx: " + getDx() + ", dy: " + getDy());
 		
 		setX(getX() + getDx());
-		setY(getX() + getDx());
-		if(getX() < -getWidth()/4) {
-			setX(getPanel().getWidth() + getWidth()/4);
-			System.out.println("1");
-		}
-		if(getY() < -getHeight()/4) {
-			setY(getPanel().getHeight() + getHeight()/4);
-			System.out.println("2");
-		}
-		if(getX() > getPanel().getWidth() + getWidth()/4) {
-			setX( -getWidth()/4);
-			System.out.println("3");
-		}
-		if(getY() > getPanel().getHeight() + getHeight()/4) {
-			setY( -getHeight()/4);
-			System.out.println("4");
-		}
-		
-		
-		getHitBox().setLocation(getX(), getY());
-		ArrayList<Asteroids> asteroids = Driver.getAsteroids();
-		for(int i = 0; i<asteroids.size(); i++) {
-			if(getHitBox().contains(asteroids.get(i).getHitBox())) {
-				asteroids.get(i).notifyIfHit(this);
-				wasHit(asteroids.get(i));
-			}
-		}
+		setY(getY() + getDy());
+//		if(getX() < -getWidth()/4) {
+//			setX(getPanel().getWidth() + getWidth()/4);
+//			System.out.println("1");
+//		}
+//		if(getY() < -getHeight()/4) {
+//			setY(getPanel().getHeight() + getHeight()/4);
+//			System.out.println("2");
+//		}
+//		if(getX() > getPanel().getWidth() + getWidth()/4) {
+//			setX( -getWidth()/4);
+//			System.out.println("3");
+//		}
+//		if(getY() > getPanel().getHeight() + getHeight()/4) {
+//			setY( -getHeight()/4);
+//			System.out.println("4");
+//		}
+//		
+//		
+//		getHitBox().setLocation(getX(), getY());
+//		ArrayList<Asteroids> asteroids = Driver.getAsteroids();
+//		for(int i = 0; i<asteroids.size(); i++) {
+//			if(getHitBox().contains(asteroids.get(i).getHitBox())) {
+//				asteroids.get(i).notifyIfHit(this);
+//				wasHit(asteroids.get(i));
+//			}
+//		}
 	}
 
 	@Override
