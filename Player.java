@@ -110,7 +110,7 @@ public class Player extends Movable implements KeyListener {
 	@Override
 	public void wasHit(Movable hitter) {
 		// Because the player shot the laser
-		if (!hitter.getClass().equals(Laser.class)) {
+		if (!hitter.getClass().equals(Laser.class) && !isHurting) {
 			numLives--;
 			Driver.lostLife();
 			isHurting = true;
@@ -162,7 +162,7 @@ public class Player extends Movable implements KeyListener {
 		ArrayList<Asteroids> asteroids = Driver.getAsteroids();
 		Asteroids temp;
 		for (int i = 0; i < asteroids.size(); i++) {
-			if (getHitBox().intersects(asteroids.get(i).getHitBox())) {
+			if (!isHurting && getHitBox().intersects(asteroids.get(i).getHitBox())) {
 				temp = asteroids.get(i);
 				// System.out.println("sdf");
 				temp.notifyIfHit(this);
@@ -178,7 +178,14 @@ public class Player extends Movable implements KeyListener {
 
 	@Override
 	public void draw(Graphics g) {
-		//if()
+		if(isHurting) {
+			currentImage = hurtImage;
+			hurtCount++;
+		}
+		if(hurtCount>50) {
+			hurtCount = 0;
+			isHurting = false;
+		}
 		double sin = Math.abs(Math.sin(Math.toRadians(dir)));
 		double cos = Math.abs(Math.cos(Math.toRadians(dir)));
 		int rW = (int) Math.floor(currentImage.getWidth() * cos + currentImage.getHeight() * sin);
