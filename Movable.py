@@ -16,11 +16,9 @@ class Movable:
 
     def notifyIsHit(self, movable):
         println("Implement later")
-        # Implement later
 
     def remove(self):
         println("Implement later")
-        # Implement later
 
     # Some children classes will override this
     def move(self):
@@ -61,4 +59,6 @@ class Movable:
     @property
     def type(self):
         return self._type
+    # -------------------------------------------
+    # Getters and Setters
     # -------------------------------------------
