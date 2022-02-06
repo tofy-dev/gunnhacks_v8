@@ -112,6 +112,8 @@ public class Driver {
 	public static void manageAsteroids(Graphics g) {
 		if (asteroids == null)
 			return;
+		
+		System.out.println(asteroids.size());
 		for (int i = 0; i < asteroids.size(); i++) {
 			asteroids.get(i).draw(g);
 			asteroids.get(i).move();
@@ -201,7 +203,6 @@ public class Driver {
 	}
 
 	public static void lostLife() {
-		// Possibly add Special effect?
 		player.setX(panel.getWidth() / 2 - player.getWidth() / 2);
 		player.setY(panel.getHeight() / 2 - player.getHeight() / 2);
 	}
@@ -219,6 +220,12 @@ public class Driver {
 		g.drawString("Score: " + score, 5, 30);
 		
 		g.drawString("Lives: " + player.getLives(), panel.getWidth()-130, 30);
+		
+		double missileCooldown = player.getMissileCooldown()/1000;
+		if(missileCooldown>5) {
+			missileCooldown = 5;
+		}
+		g.drawString("Missile Cooldown: " + (5 - missileCooldown), 5, panel.getHeight()-30);
 	}
 	
 	public static void updateScore(int i) {
@@ -235,7 +242,7 @@ public class Driver {
 			if (speedy == 0) {
 				speedy = 1;
 			}
-			int size = (int) (Math.random() * 20) + 10;
+			int size = (int) (Math.random() * 30) + 10;
 			asteroids.add(new Asteroids((int) (Math.random() * panel.getWidth()),
 					(int) (Math.random() * panel.getHeight()), speedx, speedy, size, panel));
 		}

@@ -32,10 +32,10 @@ public class Asteroids extends Movable{
 	
 	@Override
 	public void draw(Graphics g) {
-		String x = "sprites/asteroid3,png";
+		String x = "sprites/asteroid3.png";
 		if(radius <= 15) {
 			x = "sprites/asteroid.png";
-		}else if(radius <= 21) {
+		}else if(radius <= 30) {
 			x = "sprites/asteroid2.png";
 		}
 		g.drawImage(new ImageIcon(x).getImage(), getX(), getY(), radius*2, radius*2, null);

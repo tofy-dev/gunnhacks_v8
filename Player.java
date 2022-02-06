@@ -317,6 +317,10 @@ public class Player extends Movable implements KeyListener {
 			missileCooldown = System.currentTimeMillis();
 		}
 	}
+	
+	public long getMissileCooldown() {
+		return System.currentTimeMillis() - missileCooldown;
+	}
 
 	/*
 	 * @Override public void keyPressed(KeyEvent e) { if(dir>Math.PI*2) { dir -=
