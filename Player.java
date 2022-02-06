@@ -96,6 +96,7 @@ public class Player extends Movable implements KeyListener{
 		ArrayList<Asteroids> asteroids = Driver.getAsteroids();
 		for(int i = 0; i<asteroids.size(); i++) {
 			if(getHitBox().contains(asteroids.get(i).getHitBox())) {
+				System.out.println("sdf");
 				asteroids.get(i).notifyIfHit(this);
 				wasHit(asteroids.get(i));
 			}

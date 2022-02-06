@@ -91,8 +91,8 @@ public abstract class Movable{
 	
 	// (0, 0) is upper left corner
 	public void move() {
-		x += dx;
-		y += dy;
+		setX(getX()+getDx());
+		setY(getY()+getDy());
 		if(getX() < -getWidth()/4) {
 			setX(getPanel().getWidth() + getWidth()/4);
 			System.out.println("1");
@@ -114,6 +114,7 @@ public abstract class Movable{
 		hitBox.setLocation(x, y);
 		ArrayList<Asteroids> asteroids = Driver.getAsteroids();
 		for(int i = 0; i<asteroids.size(); i++) {
+			System.out.print("69");
 			if(getHitBox().contains(asteroids.get(i).getHitBox()) && !asteroids.get(i).equals(this)) {
 				asteroids.get(i).notifyIfHit(this);
 				wasHit(asteroids.get(i));
