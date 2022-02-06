@@ -143,19 +143,19 @@ public class Player extends Movable implements KeyListener {
 		setY(getY() + getDy());
 		if (getX() < -getWidth()) {
 			setX(getPanel().getWidth() + getWidth());
-			System.out.println("1");
+			//System.out.println("1");
 		}
 		if (getY() < -getHeight()) {
 			setY(getPanel().getHeight() + getHeight());
-			System.out.println("2");
+			//System.out.println("2");
 		}
 		if (getX() > getPanel().getWidth() + getWidth()) {
 			setX(-getWidth());
-			System.out.println("3");
+			//System.out.println("3");
 		}
 		if (getY() > getPanel().getHeight() + getHeight()) {
 			setY(-getHeight());
-			System.out.println("4");
+			//System.out.println("4");
 		}
 
 		getHitBox().setLocation(getX(), getY());
@@ -179,12 +179,17 @@ public class Player extends Movable implements KeyListener {
 	@Override
 	public void draw(Graphics g) {
 		if(isHurting) {
-			currentImage = hurtImage;
+			if(hurtCount/4%2==0) {
+				currentImage = hurtImage;
+			}else {
+				currentImage = normalImage;
+			}
 			hurtCount++;
 		}
-		if(hurtCount>100) {
+		if(hurtCount>70) {
 			hurtCount = 0;
 			isHurting = false;
+			currentImage = normalImage;
 		}
 		double sin = Math.abs(Math.sin(Math.toRadians(dir)));
 		double cos = Math.abs(Math.cos(Math.toRadians(dir)));
