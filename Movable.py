@@ -1,7 +1,7 @@
 class Movable:
     # We will need to add some sort of Board variable too
     # def __init_(self, t_x, t_y, t_dx, t_dy, t_type, win):
-    def __init_(self, t_x, t_y, t_dx, t_dy, win, img):
+    def __init__(self, t_x, t_y, t_dx, t_dy, win, img):
         self._x = t_x
         self._y = t_y
         self._dx = t_dx
