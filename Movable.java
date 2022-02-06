@@ -84,7 +84,6 @@ public abstract class Movable{
 	public abstract void draw(Graphics g);
 	
 	public void notifyIfHit(Movable hitter) {
-		hitter.wasHit(this);
 		this.wasHit(hitter);
 	}
 	

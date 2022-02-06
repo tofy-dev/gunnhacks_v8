@@ -70,7 +70,7 @@ public class Player extends Movable implements KeyListener{
 		setDx((int) (Math.cos(dir-Math.PI/2)*speed));
 		setDy((int) (Math.sin(dir-Math.PI/2)*speed));
 		
-		System.out.println("dx: " + getDx() + ", dy: " + getDy());
+		//System.out.println("dx: " + getDx() + ", dy: " + getDy());
 		
 		setX(getX() + getDx());
 		setY(getY() + getDy());
@@ -104,7 +104,7 @@ public class Player extends Movable implements KeyListener{
 
 	@Override
 	public void remove() {
-		// Implement GameOver
+		
 	}
 	
 	@Override
@@ -134,7 +134,7 @@ public class Player extends Movable implements KeyListener{
 			dir += Math.PI*2;
 		}
 		int typed = e.getKeyCode();
-		System.out.println(typed + ", " + (180*dir/Math.PI));
+		//System.out.println(typed + ", " + (180*dir/Math.PI));
 			
 		if(typed==KeyEvent.VK_LEFT) {
 			dir-=0.1;

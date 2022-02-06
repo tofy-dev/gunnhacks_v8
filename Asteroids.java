@@ -31,18 +31,19 @@ public class Asteroids extends Movable{
 
 	@Override
 	public void remove(){
-
+		Driver.getAsteroids().remove(this);
 	}
 	
 	@Override
 	public void draw(Graphics g) {
-		g.drawImage(new ImageIcon("sprites/asteroid.png").getImage(), getX(), getY(), radius/2, radius/2, null);
+		g.drawImage(new ImageIcon("sprites/asteroid.png").getImage(), getX(), getY(), radius*2, radius*2, null);
 	}
 
 	
 	@Override
 	public void wasHit(Movable hitter) {
-		if(hitter.getType()==2) { // If hitter is a laser
+		System.out.println("was hit");
+		if(hitter.getType()==2 || hitter.getType() == 1) { // If hitter is a laser
 			if(getRadius() >= 4) {
 				Asteroids a = new Asteroids(getX(), getY(), getDx(), getDy(), radius/2, getPanel());
 				Driver.getAsteroids().add(a);
@@ -50,8 +51,6 @@ public class Asteroids extends Movable{
 				Driver.getAsteroids().add(b);
 				Coin coin = new Coin(getX(), getY(), 0, 0, 10, 20, getPanel());
 				coin.draw(getPanel().getGraphics());
-				a.draw(getPanel().getGraphics());
-				b.draw(getPanel().getGraphics());
 			}
 			
 			Coin coin = new Coin(getX(), getY(), 0, 0, 30, 50, getPanel());
