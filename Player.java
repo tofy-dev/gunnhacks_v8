@@ -110,7 +110,7 @@ public class Player extends Movable implements KeyListener {
 	@Override
 	public void wasHit(Movable hitter) {
 		// Because the player shot the laser
-		if (!hitter.getClass().equals(Laser.class) && !isHurting) {
+		if (hitter.getType()==3 && !isHurting) {
 			numLives--;
 			Driver.lostLife();
 			isHurting = true;
@@ -159,14 +159,26 @@ public class Player extends Movable implements KeyListener {
 		}
 
 		getHitBox().setLocation(getX(), getY());
+		
 		ArrayList<Asteroids> asteroids = Driver.getAsteroids();
 		Asteroids temp;
 		for (int i = 0; i < asteroids.size(); i++) {
 			if (!isHurting && getHitBox().intersects(asteroids.get(i).getHitBox())) {
 				temp = asteroids.get(i);
 				// System.out.println("sdf");
-				temp.notifyIfHit(this);
+				temp.wasHit(this);
 				wasHit(temp);
+				i--;
+			}
+		}
+		
+		ArrayList<Coin> coins = Driver.getCoins();
+		Coin c;
+		for(int i = 0; i<coins.size(); i++) {
+			if(getHitBox().intersects(coins.get(i).getHitBox())) {
+				c = coins.get(i);
+				c.wasHit(this);
+				i--;
 			}
 		}
 	}

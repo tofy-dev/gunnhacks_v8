@@ -23,11 +23,12 @@ public class Coin extends Movable {
 
     public void wasHit(Movable hitter) {
         if (hitter.getType() == 1) {
-            // remove();
+            remove();
         }
     }
 
     public void remove() {
+    	System.out.println(getValue());
         Driver.updateScore(getValue());
         Driver.getCoins().remove(this);
     }

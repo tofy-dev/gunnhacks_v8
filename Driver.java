@@ -99,6 +99,7 @@ public class Driver {
 				managePlayer(g);
 				manageAsteroids(g);
 				manageLasers(g);
+				manageCoins(g);
 				
 				drawText(g);
 				
@@ -155,10 +156,32 @@ public class Driver {
 		if (lasers == null)
 			return;
 		Laser l;
+		int origSize = lasers.size();
 		for (int i = 0; i < lasers.size(); i++) {
 			l = lasers.get(i);
 			l.draw(g);
 			l.move();
+			if(origSize != lasers.size()) {
+				origSize = lasers.size();
+				i--;
+			}
+		}
+	}
+	
+	public static void manageCoins(Graphics g) {
+		if (coins == null)
+			return;
+		//System.out.println(coins.size());
+		Coin c;
+		int origSize = coins.size();
+		for (int i = 0; i < coins.size(); i++) {
+			c = coins.get(i);
+			c.draw(g);
+			c.move();
+			if(origSize != coins.size()) {
+				origSize = coins.size();
+				i--;
+			}
 		}
 	}
 

@@ -20,11 +20,7 @@ public class Asteroids extends Movable{
 	public int getRadius(){
 		return radius;
 	}
-
-	public void notifyIfHit(){
-
-	}
-
+	
 	public int getType(){
 		return 3;
 	}
@@ -49,15 +45,13 @@ public class Asteroids extends Movable{
 				Driver.getAsteroids().add(a);
 				Asteroids b = new Asteroids(getX(), getY(), -getDx(), -getDy(), 2*radius/3, getPanel());
 				Driver.getAsteroids().add(b);
-				Coin coin = new Coin(getX(), getY(), 0, 0, 10, 20, getPanel());
-				coin.draw(getPanel().getGraphics());
+				createCoin();
 			}
 			
-			Coin coin = new Coin(getX(), getY(), 0, 0, 30, 50, getPanel());
-			coin.draw(getPanel().getGraphics());
+			createCoin();
 			remove();
 		}else if(hitter.getType() == 4) {
-			Coin coin = new Coin(getX(), getY(), 0, 0, 10, 20, getPanel());
+			createCoin();
 			remove();
 		}else{ // If hitter is an asteroid
 //			setDx(0- getDx());
@@ -65,5 +59,9 @@ public class Asteroids extends Movable{
 		}
 	}
 	
+	public void createCoin() {
+		Coin coin = new Coin(getX(), getY(), 0, 0, 10, 20, getPanel());
+		Driver.getCoins().add(coin);
+	}
 	
 }

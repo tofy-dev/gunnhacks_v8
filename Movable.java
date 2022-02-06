@@ -83,10 +83,6 @@ public abstract class Movable{
 	
 	public abstract void draw(Graphics g);
 	
-	public void notifyIfHit(Movable hitter) {
-		this.wasHit(hitter);
-	}
-	
 	public abstract void remove();
 	
 	// (0, 0) is upper left corner
@@ -95,19 +91,19 @@ public abstract class Movable{
 		y += dy;
 		if(getX() < -getWidth()) {
 			setX(getPanel().getWidth() + getWidth()/4);
-			System.out.println("1");
+			//System.out.println("1");
 		}
 		if(getY() < -getHeight()) {
 			setY(getPanel().getHeight() + getHeight()/4);
-			System.out.println("2");
+			//System.out.println("2");
 		}
 		if(getX() > getPanel().getWidth() + getWidth()/4) {
 			setX( -getWidth()/4);
-			System.out.println("3");
+			//System.out.println("3");
 		}
 		if(getY() > getPanel().getHeight() + getHeight()/4) {
 			setY( -getHeight()/4);
-			System.out.println("4");
+			//System.out.println("4");
 		}
 		
 		
@@ -118,11 +114,11 @@ public abstract class Movable{
 		for(int i = 0; i<asteroids.size(); i++) {
 			a = asteroids.get(i);
 			if(getHitBox().intersects(a.getHitBox()) && !a.equals(this)) {
-				a.notifyIfHit(this);
+				a.wasHit(this);
 				wasHit(a);
 				if(asteroids.size()!=origSize) {
 					i--;
-					origSize--;
+					origSize = asteroids.size();
 				}
 			}
 		}
