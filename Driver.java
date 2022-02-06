@@ -22,7 +22,7 @@ public class Driver {
 
 	private static long astCooldown = System.currentTimeMillis();
 
-	public static void main(String[] args) {
+	public static void run() {
 
 		frame = new JFrame("AstBlast");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -74,6 +74,7 @@ public class Driver {
 			panel.repaint();
 		}
 		drawGameOver(g);
+		
 	}
 
 	public static class Panel extends JPanel {

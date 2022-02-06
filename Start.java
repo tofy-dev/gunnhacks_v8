@@ -2,14 +2,18 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public class Start {
 
 	private static Panel panel;
+	private static Panel gamePanel;
 	private static JFrame frame;
 	private static Graphics2D g2;
 	private static Graphics g;
@@ -18,9 +22,10 @@ public class Start {
 
 		frame = new JFrame("AstBlast");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setBounds(0, 0, 700, 700);
+		frame.setBounds(0, 0, 1000, 1000);
 
 		panel = new Panel();
+		gamePanel = new Panel();
 		// panel.setBackground(Color.GRAY);
 
 		panel.setLayout(null);
@@ -28,6 +33,7 @@ public class Start {
 		frame.add(panel);
 
 		frame.setVisible(true);
+		panel.setVisible(true);
 
 		try {
 			Thread.sleep(200);
@@ -45,12 +51,21 @@ public class Start {
 		g = panel.getGraphics();
 		g.setColor(Color.BLACK);
 		
-		
+		JButton button = new JButton();
+		button.setText("START GAME");
+		button.setBackground(Color.WHITE);
+		button.addActionListener(panel);
+		panel.add(button);
+		button.requestFocus();
 		
 
 	}
+	
+	public static void startGame() {
+		Driver.run();
+	}
 
-	public static class Panel extends JPanel {
+	public static class Panel extends JPanel implements ActionListener{
 
 		private int x = 5;
 
@@ -61,5 +76,11 @@ public class Start {
 			
 		}
 
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			Start.startGame();
+		}
+
 	}
+
 }
