@@ -83,7 +83,7 @@ public class Driver {
 		protected void paintComponent(Graphics g) {
 			
 			if(asteroids != null && asteroids.size() <= 1) {
-				spawnAsteroids();
+				spawnAsteroids(6);
 			}
 			
 			if (!isGameOver) {
@@ -113,6 +113,10 @@ public class Driver {
 	public static void manageAsteroids(Graphics g) {
 		if (asteroids == null)
 			return;
+		
+		if(Math.random()<0.0001) {
+			spawnAsteroids(1);
+		}
 		
 		System.out.println(asteroids.size());
 		for (int i = 0; i < asteroids.size(); i++) {
@@ -269,8 +273,8 @@ public class Driver {
 		score += i;
 	}
 
-	public static void spawnAsteroids() {
-		for (int i = 0; i < 6; i++) {
+	public static void spawnAsteroids(int num) {
+		for (int i = 0; i < num; i++) {
 			int speedx = (int) (Math.random() * 8) - 4;
 			if (speedx == 0) {
 				speedx = 1;
