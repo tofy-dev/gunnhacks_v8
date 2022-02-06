@@ -88,7 +88,7 @@ public class Driver {
 			if (!isGameOver) {
 				super.paintComponent(g);
 				// g.setColor(Color.RED);
-				if (player.getLives() <= 0) {
+				if (player != null && player.getLives() <= 0) {
 					setGameOver(true);
 				}
 				managePlayer(g);
