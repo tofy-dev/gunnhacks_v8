@@ -1,30 +1,16 @@
 class Movable:
     # We will need to add some sort of Board variable too
     # def __init_(self, t_x, t_y, t_dx, t_dy, t_type, win):
-    def __init_(self, t_x, t_y, t_dx, t_dy, win, img):
+    def __init__(self, t_x, t_y, t_dx, t_dy, img, win):
         self._x = t_x
         self._y = t_y
         self._dx = t_dx
         self._dy = t_dy
 
-        self.win = win
-        self.img = img
-        self._type = null
-   
-    def draw(self):
-        win.blit(self.img, (self.x, self.y))
-
-    def notifyIsHit(self, movable):
-        println("Implement later")
-
-    def remove(self):
-        println("Implement later")
-
-    # Some children classes will override this
-    def move(self):
-        self.x += self.dx
-        self.y += self.dy
-
+        self._img = img
+        self._win = win
+        self._type = "placeholder"
+    
     # -------------------------------------------
     # Getters and Setters
     # -------------------------------------------
@@ -55,10 +41,32 @@ class Movable:
     @dy.setter
     def dy(self, t_dy):
         self._dy = t_dy
+    
+    @property
+    def img(self):
+        return self._img
+    @img.setter
+    def img(self, t_dy):
+        self._img = t_img
 
+    @property
+    def win(self):
+        return self._win
+    
     @property
     def type(self):
         return self._type
     # -------------------------------------------
-    # Getters and Setters
-    # -------------------------------------------
+
+    def draw(self):
+        self.win.blit(self.img, (self.x, self.y))
+
+    def notifyIsHit(self, movable):
+        print("Implement later")
+
+    def remove(self):
+        print("Implement later")
+
+    def move(self):
+        self.x += self.dx
+        self.y += self.dy

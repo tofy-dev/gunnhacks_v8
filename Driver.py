@@ -1,6 +1,6 @@
 import pygame
 import os
-import Movable
+from Movable import Movable
 
 # game information
 WIDTH, HEIGHT = 900, 500
@@ -13,7 +13,7 @@ BLACK = (0, 0, 0)
 SPACESHIP_IMG = pygame.image.load(os.path.join('sprites', 'player.png'))
 
 # class instances
-player = Movable(WIDTH/2, HEIGHT/2, 10, 10, WIN, SPACESHIP_IMG)
+player = Movable(WIDTH/2, HEIGHT/2, 10, 10, SPACESHIP_IMG, WIN)
 
 # updates what's displayed on the screen
 def draw_window():
