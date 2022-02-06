@@ -51,9 +51,18 @@ public class Driver{
 		g.setColor(Color.BLACK);
 		
 		asteroids = new ArrayList<Asteroids>();
-		for(int i = 0; i<10; i++){
+		for(int i = 0; i<5; i++){
+			int speedx = (int)(Math.random()*8)-4;
+			if(speedx == 0) {
+				speedx = 1;
+			}
+			int speedy = (int)(Math.random()*8)-4;
+			if(speedy == 0) {
+				speedy = 1;
+			}
+			int size = (int)(Math.random()*30) + 20;
 			asteroids.add(new Asteroids((int)(Math.random()*panel.getWidth()), 
-					(int)(Math.random()*panel.getHeight()), (int)(Math.random()*8)-4, (int)(Math.random()*8)-4, 50, panel));
+					(int)(Math.random()*panel.getHeight()), speedx, speedy, size, panel));
 		}		
 		lasers = new ArrayList<Laser>();
 		

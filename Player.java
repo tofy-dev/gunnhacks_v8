@@ -190,7 +190,6 @@ public class Player extends Movable implements KeyListener {
 //		int nX = getX() + getWidth()/2 + (int) (r * Math.cos(dir));
 //		int nY = getY() - getHeight()/2 + (int) (r * Math.sin(dir));
 		if (System.currentTimeMillis() - cooldown >= 1000) {
-			System.out.println("over");
 			int r = getWidth() / 2;
 
 			double tDir = dir - Math.PI / 2;

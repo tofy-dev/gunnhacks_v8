@@ -44,10 +44,10 @@ public class Asteroids extends Movable{
 	public void wasHit(Movable hitter) {
 		//System.out.println("was hit");
 		if(hitter.getType()==2) { // If hitter is a laser
-			if(getRadius() >= 4) {
-				Asteroids a = new Asteroids(getX(), getY(), getDx(), getDy(), radius/2, getPanel());
+			if(getRadius() >= 10) {
+				Asteroids a = new Asteroids(getX(), getY(), getDx(), getDy(), 2*radius/3, getPanel());
 				Driver.getAsteroids().add(a);
-				Asteroids b = new Asteroids(getX(), getY(), -getDx(), -getDy(), radius/2, getPanel());
+				Asteroids b = new Asteroids(getX(), getY(), -getDx(), -getDy(), 2*radius/3, getPanel());
 				Driver.getAsteroids().add(b);
 				Coin coin = new Coin(getX(), getY(), 0, 0, 10, 20, getPanel());
 				coin.draw(getPanel().getGraphics());
