@@ -23,7 +23,7 @@ public class Driver {
 		frame.setBounds(0, 0, 700, 700);
 
 		panel = new Panel();
-		panel.setBackground(Color.GRAY);
+		//panel.setBackground(Color.GRAY);
 
 		panel.setLayout(null);
 
@@ -88,6 +88,7 @@ public class Driver {
 		protected void paintComponent(Graphics g) {
 			if (!isGameOver) {
 				super.paintComponent(g);
+				g.drawImage(new ImageIcon("sprites/background.jpg").getImage(), 0, 0, panel.getWidth(), panel.getHeight(), null);
 				// g.setColor(Color.RED);
 				if (player != null && player.getLives() <= 0) {
 					setGameOver(true);
