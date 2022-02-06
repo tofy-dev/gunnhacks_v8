@@ -11,6 +11,7 @@ public class Asteroids extends Movable{
 		radius = tradius;
 	}
 	
+	
 	public void setRadius(int z){
 		radius = z;
 	}

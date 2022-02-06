@@ -80,8 +80,21 @@ public abstract class Movable{
 	}
 	
 	public void move() {
-		x += dx;
-		y += dy;
+		setX(getX() + getDx());
+		setY(getY() + getDy());
+		
+		if(getX() < 0) {
+			setX(getPanel().getWidth());
+		}
+		if(getY() < 0) {
+			setY(getPanel().getHeight());
+		}
+		if(getX() > getPanel().getWidth()) {
+			setX(0);
+		}
+		if(getY() > getPanel().getHeight()) {
+			setY(0);
+		}
 		hitBox.setLocation(x, y);
 	}
 	
