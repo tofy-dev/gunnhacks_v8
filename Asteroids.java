@@ -60,8 +60,8 @@ public class Asteroids extends Movable{
 			Coin coin = new Coin(getX(), getY(), 0, 0, 10, 20, getPanel());
 			remove();
 		}else{ // If hitter is an asteroid
-			setDx(0- getDx());
-			setDy(0- getDy());
+//			setDx(0- getDx());
+//			setDy(0- getDy());
 		}
 	}
 	
