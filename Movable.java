@@ -114,7 +114,7 @@ public abstract class Movable{
 		hitBox.setLocation(x, y);
 		ArrayList<Asteroids> asteroids = Driver.getAsteroids();
 		for(int i = 0; i<asteroids.size(); i++) {
-			if(getHitBox().contains(asteroids.get(i).getHitBox()) && !asteroids.get(i).equals(this)) {
+			if(getHitBox().intersects(asteroids.get(i).getHitBox()) && !asteroids.get(i).equals(this)) {
 				asteroids.get(i).notifyIfHit(this);
 				wasHit(asteroids.get(i));
 			}

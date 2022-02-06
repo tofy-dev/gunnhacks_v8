@@ -127,9 +127,11 @@ public class Driver{
 	
 	public static void manageLasers(Graphics g) {
 		if(lasers==null) return;
+		Laser l;
 		for(int i = 0; i<lasers.size(); i++) {
-			lasers.get(i).draw(g);
-			lasers.get(i).move();
+			l = lasers.get(i);
+			l.draw(g);
+			l.move();
 		}
 	}
 
