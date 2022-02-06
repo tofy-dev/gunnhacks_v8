@@ -7,3 +7,7 @@
 /Laser.class
 /Missile.class
 /Coin.class
+/Player$UpAction.class
+/Player$DownAction.class
+/Player$LeftAction.class
+/Player$RightAction.class

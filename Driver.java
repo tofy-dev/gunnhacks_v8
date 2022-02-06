@@ -50,13 +50,10 @@ public class Driver{
 		g.setColor(Color.BLACK);
 		
 		asteroids = new ArrayList<Asteroids>();
-		for(int i = 0; i<10; i++){
-			asteroids.add(new Asteroids((int)(Math.random()*panel.getWidth()), 
-					(int)(Math.random()*panel.getHeight()), (int)(Math.random()*8)-4, (int)(Math.random()*8)-4, 50, panel));
-		}
+		asteroids.add(new Asteroids(100, 100, 1, -2, 50, panel));
 		
 		
-		player = new Player(350, 600, 50, 50, 6, panel);
+		player = new Player(350, 600, 50, 50, 5, panel);
 		panel.setFocusable(true);
 		panel.requestDefaultFocus();
 		
@@ -64,6 +61,18 @@ public class Driver{
 		
 		
 		while(true) {
+			if(player.isUpPressed()) {
+				player.move();
+			}
+			if(player.isDownPressed()) {
+				player.shoot();
+			}
+			if(player.isLeftPressed()) {
+				player.setdir(player.getdir() - 0.1);
+			}
+			if(player.isRightPressed()) {
+				player.setdir(player.getdir() + 0.1);;
+			}
 			try {
 				Thread.sleep(30);
 			} catch (InterruptedException e) {

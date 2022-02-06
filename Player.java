@@ -20,6 +20,11 @@ public class Player extends Movable implements KeyListener{
 	private Graphics2D g2;
 	private BufferedImage image;
 	
+	private boolean upPressed = false;
+	private boolean downPressed = false;
+	private boolean leftPressed = false;
+	private boolean rightPressed = false;
+	
 	public Player(int tx, int ty, int width, int height, int speed, JPanel panel) {
 		super(tx, ty, (int) (Math.cos(0)*speed), (int)(Math.sin(0)*speed), width, height, panel);
 		this.dir = 0;
@@ -35,9 +40,23 @@ public class Player extends Movable implements KeyListener{
 		
 	}
 	
+	public boolean isUpPressed() {
+		return upPressed;
+	}
+	public boolean isDownPressed() {
+		return downPressed;
+	}
+	public boolean isLeftPressed() {
+		return leftPressed;
+	}
+	public boolean isRightPressed() {
+		return rightPressed;
+	}
+	
 	public void setdir(double z) {
 		dir = z;
 	}
+	
 	
 	public double getdir() {
 		return dir;
@@ -126,7 +145,49 @@ public class Player extends Movable implements KeyListener{
 
 	@Override
 	public void keyTyped(KeyEvent e) {}
+	
+	@Override
+	public void keyPressed(KeyEvent e) {
+		if(dir>Math.PI*2) {
+			dir -= Math.PI*2;
+		}else if(dir<0-Math.PI*2) {
+			dir += Math.PI*2;
+		}
+		int typed = e.getKeyCode();
+		if(typed==KeyEvent.VK_LEFT) {
+			leftPressed = true;
+		}
+		else if(typed==KeyEvent.VK_RIGHT) {
+			rightPressed = true;
+		}
+		else if(typed==KeyEvent.VK_DOWN) {
+			downPressed = true;
+		}else if(typed==KeyEvent.VK_UP) {
+			upPressed = true;
+		}
+	}
 
+	@Override
+	public void keyReleased(KeyEvent e) {
+		int typed = e.getKeyCode();
+		if(typed==KeyEvent.VK_LEFT) {
+			leftPressed = false;
+		}
+		else if(typed==KeyEvent.VK_RIGHT) {
+			rightPressed = false;
+		}
+		else if(typed==KeyEvent.VK_DOWN) {
+			downPressed = false;
+		}else if(typed==KeyEvent.VK_UP) {
+			upPressed = false;
+		}
+	}
+	
+	public void shoot() {
+		// Implement
+	}
+	
+	/*
 	@Override
 	public void keyPressed(KeyEvent e) {
 		if(dir>Math.PI*2) {
@@ -149,12 +210,6 @@ public class Player extends Movable implements KeyListener{
 			move();
 		}
 	}
-
-	@Override
-	public void keyReleased(KeyEvent e) {}
-	
-	public void shoot() {
-		// Implement
-	}
+*/
 	
 }
