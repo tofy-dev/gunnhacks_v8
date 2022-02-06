@@ -149,6 +149,9 @@ public class Driver {
 			player.setdir(player.getdir() + 0.1);
 
 		}
+		if(player.isSlashPressed()) {
+			player.shootMissile();
+		}
 	}
 
 	public static void manageLasers(Graphics g) {
