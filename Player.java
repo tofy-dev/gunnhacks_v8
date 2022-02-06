@@ -92,7 +92,7 @@ public class Player extends Movable implements KeyListener {
 	public void move() {
 		setDx((int) (Math.cos(dir - Math.PI / 2) * speed));
 		setDy((int) (Math.sin(dir - Math.PI / 2) * speed));
-		if(is)
+		//if((isDown)
 
 		// System.out.println("dx: " + getDx() + ", dy: " + getDy());
 
@@ -130,7 +130,7 @@ public class Player extends Movable implements KeyListener {
 
 	@Override
 	public void remove() {
-		Driver.setGameOver(true);
+		Driver.lostLife();
 	}
 
 	@Override
