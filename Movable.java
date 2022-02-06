@@ -1,4 +1,5 @@
 import java.awt.Graphics;
+import java.awt.Rectangle;
 
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
@@ -9,16 +10,18 @@ public abstract class Movable{
 	private int y;
 	private int dx;
 	private int dy;
+	private Rectangle hitBox;
 	
 	private JPanel panel;
 	//private Graphics g;
 	
-	public Movable(int tx, int ty, int tdx, int tdy, JPanel panel) {
+	public Movable(int tx, int ty, int tdx, int tdy, int width, int height, JPanel panel) {
 		x = tx;
 		y = ty;
 		dx = tdx;
 		dy = tdy;
 		this.panel = panel;
+		hitBox = new Rectangle(x, y, width, height);
 		//g = panel.getGraphics();
 	}
 	
@@ -60,6 +63,10 @@ public abstract class Movable{
 
 	public abstract int getType();
 	
+	public Rectangle getHitBox() {
+		return hitBox;
+	}
+	
 	public void draw(Graphics g) {
 		g.drawImage(new ImageIcon("sprites/asteroid.png").getImage(), x, y, null);
 	}
@@ -75,6 +82,7 @@ public abstract class Movable{
 	public void move() {
 		x += dx;
 		y += dy;
+		hitBox.setLocation(x, y);
 	}
 	
 	
