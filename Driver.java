@@ -1,5 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.ArrayList;
 	
 
@@ -49,7 +51,12 @@ public class Driver{
 		
 		asteroids = new ArrayList<Asteroids>();
 		asteroids.add(new Asteroids(100, 100, 1, -2, 50, panel));
+		
+		
 		player = new Player(350, 600, 50, 50, 5, Math.PI/2, panel);
+		panel.addKeyListener(player);
+		
+		
 		while(true) {
 			try {
 				Thread.sleep(30);
