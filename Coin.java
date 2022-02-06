@@ -28,7 +28,8 @@ public class Coin extends Movable {
     }
 
     public void remove() {
-        
+        Driver.updateScore(getValue());
+        Driver.getCoins().remove(this);
     }
 
 	@Override
