@@ -13,9 +13,11 @@ public class Driver {
 
 	private static ArrayList<Asteroids> asteroids;
 	private static ArrayList<Laser> lasers;
+	private static ArrayList<Coin> coins;
 	private static Player player;
 	private static boolean isGameOver = false;
 	private static boolean spawnOnce = true;
+	private static int score = 0;
 
 	private static long astCooldown = System.currentTimeMillis();
 
@@ -52,6 +54,7 @@ public class Driver {
 
 		asteroids = new ArrayList<Asteroids>();
 		lasers = new ArrayList<Laser>();
+		coins = new ArrayList<Coin>();
 
 		player = new Player(350, 600, 50, 50, 5, panel);
 		panel.setFocusable(true);
@@ -76,6 +79,7 @@ public class Driver {
 		private int x = 5;
 
 		protected void paintComponent(Graphics g) {
+			
 			if(!spawnOnce && asteroids != null && asteroids.size() <= 1) {
 				spawnAsteroids();
 			}
@@ -85,8 +89,10 @@ public class Driver {
 			}
 			if (!isGameOver) {
 				super.paintComponent(g);
+				
 				g.drawImage(new ImageIcon("sprites/background.jpg").getImage(), 0, 0, panel.getWidth(),
 						panel.getHeight(), null);
+				drawScore(g2);
 				// g.setColor(Color.RED);
 				if (player != null && player.getLives() <= 0) {
 					setGameOver(true);
@@ -117,6 +123,10 @@ public class Driver {
 
 	public static ArrayList<Laser> getLasers() {
 		return lasers;
+	}
+	
+	public static ArrayList<Coin> getCoins(){
+		return coins;
 	}
 
 	public static void managePlayer(Graphics g) {
@@ -166,6 +176,16 @@ public class Driver {
 		g.setColor(Color.GREEN);
 		g.setFont(new Font("Times", Font.BOLD, 80));
 		g.drawString("GAME OVER", 100, 350);
+	}
+	
+	public static void drawScore(Graphics2D g) {
+		g.setColor(Color.ORANGE);
+		g.setFont(new Font("Times", Font.BOLD, 80));
+		g.drawString("Score: " + score, 100, 100);
+	}
+	
+	public static void updateScore(int i) {
+		score += i;
 	}
 
 	public static void spawnAsteroids() {

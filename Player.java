@@ -265,7 +265,7 @@ public class Player extends Movable implements KeyListener {
 			}
 			int nX = getX() + getWidth() / 2 + (int) (r * Math.cos(tDir));
 			int nY = getY() + getHeight() / 2 + (int) (r * Math.sin(tDir));
-			Driver.getLasers().add(new Laser(nX, nY, 10, 5, dir, 10, getPanel()));
+			Driver.getLasers().add(new Laser(nX, nY, 5, 5, dir, 10, getPanel()));
 			cooldown = System.currentTimeMillis();
 		}
 	}
