@@ -11,6 +11,7 @@ public class Driver{
 	private static Graphics g;
 	
 	private static ArrayList<Asteroids> asteroids;
+	private static Player player;
 	
 	
 	
@@ -47,7 +48,8 @@ public class Driver{
 		g.setColor(Color.BLACK);
 		
 		asteroids = new ArrayList<Asteroids>();
-		asteroids.add(new Asteroids(100, 100, 1, -2, 50, panel, asteroids));
+		asteroids.add(new Asteroids(100, 100, 1, -2, 50, panel));
+		player = new Player(350, 600, 50, 50, 5, Math.PI/2, panel);
 		while(true) {
 			try {
 				Thread.sleep(30);
@@ -64,7 +66,7 @@ public class Driver{
 		 protected void paintComponent(Graphics g){
 	         super.paintComponent(g);
 	         //g.setColor(Color.RED);
-	     	 g.drawImage(new ImageIcon("sprites/player.png").getImage(), x, 100, 50, 50, null);
+	         managePlayer(g);
 	     	 manageAsteroids(g);
 	     	 
 	     	 
@@ -79,6 +81,15 @@ public class Driver{
 			asteroids.get(i).draw(g);
 			asteroids.get(i).move();
 		}
+	}
+	
+	public static ArrayList<Asteroids> getAsteroids(){
+		return asteroids;
+	}
+	
+	public static void managePlayer(Graphics g) {
+		if(player==null) return;
+		player.draw(g);
 	}
 
 }

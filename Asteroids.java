@@ -7,8 +7,8 @@ import javax.swing.JPanel;
 public class Asteroids extends Movable{
 	
 	private int radius;
-	public Asteroids(int tx, int ty, int tdx, int tdy, int tradius, JPanel panel, ArrayList<Asteroids> arr) {
-		super(tx,ty,tdx,tdy, 2*tradius, 2*tradius, panel, arr);
+	public Asteroids(int tx, int ty, int tdx, int tdy, int tradius, JPanel panel) {
+		super(tx,ty,tdx,tdy, 2*tradius, 2*tradius, panel);
 		radius = tradius;
 	}
 	
@@ -42,17 +42,20 @@ public class Asteroids extends Movable{
 	
 	@Override
 	public void wasHit(Movable hitter) {
-		if(!hitter.getClass().equals(Asteroids.class)) {
+		if(hitter.getType()==2) { // If hitter is a laser
 			if(getRadius() >= 4) {
-				Asteroids a = new Asteroids(getX(), getY(), getDx(), getDy(), radius/2, getPanel(), getAsteroids());
-				getAsteroids().add(a);
-				Asteroids b = new Asteroids(getX(), getY(), -getDx(), -getDy(), radius/2, getPanel(), getAsteroids());
-				getAsteroids().add(b);
-				a.draw(getPanel().getGraphics());
-				b.draw(getPanel().getGraphics());
-			}else {
-				remove();
+				Asteroids a = new Asteroids(getX(), getY(), getDx(), getDy(), radius/2, getPanel());
+				Driver.getAsteroids().add(a);
+				Asteroids b = new Asteroids(getX(), getY(), -getDx(), -getDy(), radius/2, getPanel());
+				Driver.getAsteroids().add(b);
+				
 			}
+			
+			// Create coin
+			remove();
+		}else{ // If hitter is an asteroid
+			setDx(0- getDx());
+			setDy(0- getDy());
 		}
 	}
 	

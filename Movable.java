@@ -16,10 +16,9 @@ public abstract class Movable{
 	private Rectangle hitBox;
 	
 	private JPanel panel;
-	private ArrayList<Asteroids> asteroids;
 	//private Graphics g;
 	
-	public Movable(int tx, int ty, int tdx, int tdy, int twidth, int theight, JPanel panel, ArrayList<Asteroids> asteroids) {
+	public Movable(int tx, int ty, int tdx, int tdy, int twidth, int theight, JPanel panel) {
 		x = tx;
 		y = ty;
 		dx = tdx;
@@ -27,7 +26,6 @@ public abstract class Movable{
 		width = twidth;
 		height = theight;
 		this.panel = panel;
-		this.asteroids = asteroids;
 		hitBox = new Rectangle(x, y, width, height);
 		//g = panel.getGraphics();
 	}
@@ -72,10 +70,6 @@ public abstract class Movable{
 		return height;
 	}
 	
-	public ArrayList<Asteroids> getAsteroids(){
-		return asteroids;
-	}
-	
 	
 	public JPanel getPanel() {
 		return panel;
@@ -87,9 +81,7 @@ public abstract class Movable{
 		return hitBox;
 	}
 	
-	public void draw(Graphics g) {
-		g.drawImage(new ImageIcon("sprites/asteroid.png").getImage(), x, y, null);
-	}
+	public abstract void draw(Graphics g);
 	
 	public void notifyIfHit(Movable hitter) {
 		hitter.wasHit(this);
@@ -98,26 +90,35 @@ public abstract class Movable{
 	
 	public abstract void remove();
 	
+	// (0, 0) is upper left corner
 	public void move() {
 		x += dx;
 		y += dy;
 		if(getX() < -getWidth()/4) {
 			setX(getPanel().getWidth() + getWidth()/4);
+			System.out.println("1");
 		}
 		if(getY() < -getHeight()/4) {
 			setY(getPanel().getHeight() + getHeight()/4);
+			System.out.println("2");
 		}
 		if(getX() > getPanel().getWidth() + getWidth()/4) {
 			setX( -getWidth()/4);
+			System.out.println("3");
 		}
 		if(getY() > getPanel().getHeight() + getHeight()/4) {
 			setY( -getHeight()/4);
+			System.out.println("4");
 		}
 		
 		
 		hitBox.setLocation(x, y);
+		ArrayList<Asteroids> asteroids = Driver.getAsteroids();
 		for(int i = 0; i<asteroids.size(); i++) {
-			asteroids.get(i).notifyIfHit(this);
+			if(getHitBox().contains(asteroids.get(i).getHitBox()) && !asteroids.get(i).equals(this)) {
+				asteroids.get(i).notifyIfHit(this);
+				wasHit(asteroids.get(i));
+			}
 		}
 	}
 	
