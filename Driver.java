@@ -1,15 +1,21 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 
 public class Driver {
 
 	private static Panel panel;
 	private static JFrame frame;
+	private static JFrame gameFrame;
 	private static Graphics2D g2;
 	private static Graphics g;
+	private static StartPanel startPanel;
+	private static JButton button;
 
 	private static ArrayList<Asteroids> asteroids;
 	private static ArrayList<Laser> lasers;
@@ -19,6 +25,7 @@ public class Driver {
 	private static boolean isGameOver = false;
 	private static boolean spawnOnce = true;
 	private static int score = 0;
+	private static boolean shouldStartGame = false;
 
 	private static long astCooldown = System.currentTimeMillis();
 
@@ -26,16 +33,63 @@ public class Driver {
 
 		frame = new JFrame("AstBlast");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setBounds(0, 0, 700, 700);
-
-		panel = new Panel();
-		// panel.setBackground(Color.GRAY);
-
-		panel.setLayout(null);
-
-		frame.add(panel);
-
+		frame.setBounds(0, 0, 400, 200);
+		
+		startPanel = new StartPanel();
+		startPanel.setLayout(null);
+		frame.add(startPanel);
+		
+		button = new JButton();
+		button.setText("START GAME");
+		button.setBounds(40, 40, 300, 100);
+		button.setBackground(Color.WHITE);
+		button.addActionListener(startPanel);
+		
+		startPanel.add(button);
+		
+		try {
+			Thread.sleep(200);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		frame.setVisible(true);
+		
+		
+		while(true) {
+			init();
+			button.setText("Start Game");
+			//System.out.println(true);
+		}
+	}
+	
+	public static void init() {
+		while(!shouldStartGame) {
+			try {
+				Thread.sleep(30);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		// panel.setBackground(Color.GRAY);
+		
+		
+		//System.out.println(1);
+		gameFrame = new JFrame();
+		gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		gameFrame.setBounds(0, 0, 700, 700);
+		
+		button.setText("End Game");
+		
+		panel = new Panel();
+		panel.setLayout(null);
+		
+		gameFrame.requestFocus();
+		gameFrame.setVisible(true);
+		
+		gameFrame.add(panel);
 
 		try {
 			Thread.sleep(200);
@@ -74,7 +128,6 @@ public class Driver {
 			panel.repaint();
 		}
 		drawGameOver(g);
-		
 	}
 
 	public static class Panel extends JPanel {
@@ -108,6 +161,24 @@ public class Driver {
 			}else {
 			}
 
+		}
+	}
+	
+	public static class StartPanel extends JPanel implements ActionListener{
+
+		//private int x = 5;
+
+		protected void paintComponent(Graphics g) {
+			super.paintComponent(g);
+		}
+		public void actionPerformed(ActionEvent e) {
+			if(Driver.shouldStartGame==false) {
+				Driver.startGame();
+			}else {
+				Driver.gameFrame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
+				//Driver.gameFrame.dispose();
+			}
+			//System.out.println(shouldStartGame);
 		}
 	}
 
@@ -246,6 +317,7 @@ public class Driver {
 	}
 	
 	public static void addLife() {
+		if(player.getLives()>=9) return;
 		player.setLives(player.getLives()+1);
 	}
 
@@ -288,5 +360,9 @@ public class Driver {
 			asteroids.add(new Asteroids((int) (Math.random() * panel.getWidth()),
 					(int) (Math.random() * panel.getHeight()), speedx, speedy, size, panel));
 		}
+	}
+	
+	protected static void startGame() {
+		shouldStartGame = true;
 	}
 }
