@@ -47,7 +47,7 @@ public class Player extends Movable implements KeyListener {
 		try {
 			normalImage = ImageIO.read(new File("sprites/player.png"));
 			g2 = normalImage.createGraphics();
-			hurtImage = normalImage;
+			hurtImage = ImageIO.read(new File("sprites/playerHurt.png"));
 //			for(int i = 0; i<hurtImage.getWidth(); i++) {
 //				for(int j = 0; i<hurtImage.getHeight(); i++) {
 //					int pixel = hurtImage.getRGB(i, j);
