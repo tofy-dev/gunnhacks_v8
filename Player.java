@@ -14,7 +14,7 @@ import javax.swing.JPanel;
 public class Player extends Movable implements KeyListener {
 
 	private double dir;
-	private int speed;
+	private double speed;
 	private int numLives = 3;
 
 	private Graphics2D g2;
@@ -97,9 +97,9 @@ public class Player extends Movable implements KeyListener {
 	@Override
 	public void move() {
 		if(isMoving() && speed<20) {
-			speed*=1.1;
-		}else {
-			speed*=0.3;
+			speed+=0.25;
+		}else if(speed>0.25){
+			speed-=0.05;
 		}
 		setDx((int) (Math.cos(dir - Math.PI / 2) * speed));
 		setDy((int) (Math.sin(dir - Math.PI / 2) * speed));
