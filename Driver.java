@@ -22,7 +22,7 @@ public class Driver {
 
 	private static long astCooldown = System.currentTimeMillis();
 
-	public static void run() {
+	public static void main(String[] args) {
 
 		frame = new JFrame("AstBlast");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
