@@ -14,6 +14,7 @@ public class Driver {
 	private static ArrayList<Asteroids> asteroids;
 	private static ArrayList<Laser> lasers;
 	private static ArrayList<Coin> coins;
+	private static ArrayList<Heart> hearts;
 	private static Player player;
 	private static boolean isGameOver = false;
 	private static boolean spawnOnce = true;
@@ -55,6 +56,7 @@ public class Driver {
 		asteroids = new ArrayList<Asteroids>();
 		lasers = new ArrayList<Laser>();
 		coins = new ArrayList<Coin>();
+		hearts = new ArrayList<Heart>();
 
 		player = new Player(350, 600, 50, 50, 5, panel);
 		panel.setFocusable(true);
@@ -80,13 +82,10 @@ public class Driver {
 
 		protected void paintComponent(Graphics g) {
 			
-			if(!spawnOnce && asteroids != null && asteroids.size() <= 1) {
+			if(asteroids != null && asteroids.size() <= 1) {
 				spawnAsteroids();
 			}
-			if(spawnOnce && System.currentTimeMillis() - astCooldown >= 1000) {
-				spawnOnce = false;
-				spawnAsteroids();
-			}
+			
 			if (!isGameOver) {
 				super.paintComponent(g);
 				
@@ -117,6 +116,14 @@ public class Driver {
 			asteroids.get(i).draw(g);
 			asteroids.get(i).move();
 		}
+	}
+	
+	public static Player getPlayer() {
+		return player;
+	}
+	
+	public static ArrayList<Heart> getHearts(){
+		return hearts;
 	}
 
 	public static ArrayList<Asteroids> getAsteroids() {
