@@ -95,15 +95,16 @@ public class Driver {
 				if (player != null && player.getLives() <= 0) {
 					setGameOver(true);
 				}
+				manageHearts(g);
 				managePlayer(g);
 				manageAsteroids(g);
 				manageLasers(g);
-				manageCoins(g);
+				manageCoins(g);		
 				
 				drawText(g);
 				
 				x += 5;
-			} else {
+			}else {
 			}
 
 		}
@@ -196,6 +197,36 @@ public class Driver {
 			}
 		}
 	}
+	
+	public static void manageHearts(Graphics g) {
+		if (hearts == null)
+			return;
+		//System.out.println(coins.size());
+		if(Math.random()<0.001) {
+			int speedx = (int) (Math.random() * 8) - 4;
+			if (speedx == 0) {
+				speedx = 1;
+			}
+			int speedy = (int) (Math.random() * 8) - 4;
+			if (speedy == 0) {
+				speedy = 1;
+			}
+			hearts.add(new Heart((int) (Math.random() * panel.getWidth()),
+					(int) (Math.random() * panel.getHeight()), speedx, speedy, 10, panel));		
+			}
+		
+		Heart h;
+		int origSize = hearts.size();
+		for (int i = 0; i < hearts.size(); i++) {
+			h = hearts.get(i);
+			h.draw(g);
+			h.move();
+			if(origSize != hearts.size()) {
+				origSize = hearts.size();
+				i--;
+			}
+		}
+	}
 
 	public static void setGameOver(boolean x) {
 		isGameOver = x;
@@ -203,8 +234,14 @@ public class Driver {
 	}
 
 	public static void lostLife() {
-		player.setX(panel.getWidth() / 2 - player.getWidth() / 2);
-		player.setY(panel.getHeight() / 2 - player.getHeight() / 2);
+		if(player.getLives()>0) {
+			player.setX(panel.getWidth() / 2 - player.getWidth() / 2);
+			player.setY(panel.getHeight() / 2 - player.getHeight() / 2);
+		}
+	}
+	
+	public static void addLife() {
+		player.setLives(player.getLives()+1);
 	}
 
 	public static void drawGameOver(Graphics g) {

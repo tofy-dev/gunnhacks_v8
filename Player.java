@@ -188,6 +188,16 @@ public class Player extends Movable implements KeyListener {
 				i--;
 			}
 		}
+		
+		ArrayList<Heart> hearts = Driver.getHearts();
+		Heart h;
+		for(int i = 0; i<hearts.size(); i++) {
+			if(getHitBox().intersects(hearts.get(i).getHitBox())) {
+				h = hearts.get(i);
+				h.wasHit(this);
+				i--;
+			}
+		}
 	}
 
 	@Override

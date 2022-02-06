@@ -24,7 +24,7 @@ public class Heart extends Movable{
 	@Override
 	public void remove() {
 		Driver.getPlayer().setLives(Driver.getPlayer().getLives() + 1);
-		Driver.getCoins().remove(this);
+		Driver.getHearts().remove(this);
 	}
 
 	@Override
