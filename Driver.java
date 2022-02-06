@@ -57,11 +57,10 @@ public class Driver {
 		frame.setVisible(true);
 		
 		
-		while(true) {
 			init();
 			button.setText("Start Game");
 			//System.out.println(true);
-		}
+		
 	}
 	
 	public static void init() {
