@@ -12,24 +12,41 @@ public class Movable{
 		dy = tdy;
 	}
 	
-	public void setX(int z) x = z;
+	public void setX(int z) {
+		x = z;
+	}
 	
-	public int getX() return x;
+	public int getX(){
+		return x;
+	}
 	
-	public void setY(int z) y = z;
+	public void setY(int z){
+		y = z;
+	}
 	
-	public int getY() return y;
+	public int getY(){
+		return y;
+	}
 	
-	public void setDx(int z) dx = z;
+	public void setDx(int z){
+		dx = z;
+	}
 	
-	public int getDx() return dx;
+	public int getDx(){
+		return dx;
+	}
 	
-	public void setDy(int z) dy = z;
-	
-	public int getDy() return dy;
-	
+	public void setDy(int z) {
+		dy = z;
+	}
+
+	public int getDy(){
+		return dy;
+	}
+
 	public int getType() {
 		// subclasses will implement
+		return 0;
 	}
 	
 	public void draw() {
