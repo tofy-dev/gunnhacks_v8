@@ -1,3 +1,8 @@
+import java.awt.Graphics;
+
+import javax.swing.ImageIcon;
+import javax.swing.JPanel;
+
 public class Coin extends Movable {
     private int radius;
     private int value;
@@ -12,8 +17,8 @@ public class Coin extends Movable {
         return value;
     }
 
-    public int setValue(tvalue) {
-        value = tvalue;
+    public void setValue(int z) {
+        value = z;
     }
 
     public void wasHit(Movable hitter) {
@@ -22,7 +27,17 @@ public class Coin extends Movable {
         }
     }
 
-    public remove() {
-        // remove the thing
+    public void remove() {
+        
     }
+
+	@Override
+	public int getType() {
+		return 5;
+	}
+
+	@Override
+	public void draw(Graphics g) {
+		g.drawImage(new ImageIcon("sprites/coin.png").getImage(), getX(), getY(), (int)getHitBox().getWidth(), (int)getHitBox().getHeight(), null);
+	}
 }

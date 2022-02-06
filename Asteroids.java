@@ -48,10 +48,17 @@ public class Asteroids extends Movable{
 				Driver.getAsteroids().add(a);
 				Asteroids b = new Asteroids(getX(), getY(), -getDx(), -getDy(), radius/2, getPanel());
 				Driver.getAsteroids().add(b);
-				
+				Coin coin = new Coin(getX(), getY(), 0, 0, 10, 20, getPanel());
+				coin.draw(getPanel().getGraphics());
+				a.draw(getPanel().getGraphics());
+				b.draw(getPanel().getGraphics());
 			}
 			
-			// Create coin
+			Coin coin = new Coin(getX(), getY(), 0, 0, 30, 50, getPanel());
+			coin.draw(getPanel().getGraphics());
+			remove();
+		}else if(hitter.getType() == 4) {
+			Coin coin = new Coin(getX(), getY(), 0, 0, 10, 20, getPanel());
 			remove();
 		}else{ // If hitter is an asteroid
 			setDx(0- getDx());
