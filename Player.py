@@ -6,6 +6,7 @@ class Player(Movable):
         angle = 0
         # speed replaces the job that dx and dy does
         self._speed = (t_dy + t_dy)//2
+        self._lives = 3
 
 
     @override
@@ -17,6 +18,15 @@ class Player(Movable):
         self.x += self.dx
         self.y += self.dy
 
+    @override
+    def move(self):
+        self.lives -= 1
+        if self.lives <=0:
+            
+
+    # -------------------------------------------
+    # Getter's and Setter's
+    # -------------------------------------------
     @angle.setter
     def angle(self, t_angle):
         self._angle = t_d
@@ -26,9 +36,12 @@ class Player(Movable):
         return self._angle
 
     @speed.setter
-    def angle(self, t_speed):
+    def speed(self, t_speed):
         self._speed = t_speed
 
     @property
     def speed(self):
         return self._speed
+    # -------------------------------------------
+    # Getter's and Setter's
+    # -------------------------------------------
