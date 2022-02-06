@@ -58,7 +58,7 @@ public class Driver {
 		
 		
 			init();
-			button.setText("Start Game");
+			button.setText("End Game");
 			//System.out.println(true);
 		
 	}
