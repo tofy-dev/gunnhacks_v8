@@ -129,7 +129,7 @@ public class Driver{
 		if(lasers==null) return;
 		for(int i = 0; i<lasers.size(); i++) {
 			lasers.get(i).draw(g);
-			//lasers.get(i).move();
+			lasers.get(i).move();
 		}
 	}
 

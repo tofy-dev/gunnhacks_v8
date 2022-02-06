@@ -186,10 +186,15 @@ public class Player extends Movable implements KeyListener{
 	}
 	
 	public void shoot() {
-		double tDir = dir;
-		int r = getWidth()/2;
-		int nX = getX() + (int) (r * Math.cos(dir));
-		int nY = getY() + (int) (r * Math.sin(dir));
+//		int r = getWidth()/2;
+//		int nX = getX() + getWidth()/2 + (int) (r * Math.cos(dir));
+//		int nY = getY() - getHeight()/2 + (int) (r * Math.sin(dir));
+	    int r = getWidth()/2;
+	    
+	    double tDir = dir - Math.PI/2;
+
+	    int nX = getX() + getWidth()/2+ (int) (r * Math.cos(tDir));
+	    int nY = getY() + getHeight()/2 + (int) (r * Math.sin(tDir));
 		Driver.getLasers().add(new Laser(nX, nY, 10, 5, dir, 8, getPanel()));
 	}
 	
