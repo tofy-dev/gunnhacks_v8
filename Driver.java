@@ -100,7 +100,7 @@ public class Driver {
 				manageAsteroids(g);
 				manageLasers(g);
 				
-				drawScore(g);
+				drawText(g);
 				
 				x += 5;
 			} else {
@@ -179,11 +179,13 @@ public class Driver {
 		g.drawString("GAME OVER", 100, 350);
 	}
 	
-	public static void drawScore(Graphics g) {
+	public static void drawText(Graphics g) {
 		if(g==null) return;
-		g.setColor(Color.RED);
-		g.setFont(new Font("Times", Font.BOLD, 80));
-		g.drawString("Score: " + score, 100, 100);
+		g.setColor(Color.GREEN);
+		g.setFont(new Font("Times", Font.BOLD, 30));
+		g.drawString("Score: " + score, 5, 30);
+		
+		g.drawString("Lives: " + player.getLives(), panel.getWidth()-130, 30);
 	}
 	
 	public static void updateScore(int i) {
