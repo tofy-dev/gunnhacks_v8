@@ -65,7 +65,7 @@ public class Driver{
 	         super.paintComponent(g);
 	         //g.setColor(Color.RED);
 	     	 g.drawImage(new ImageIcon("sprites/player.png").getImage(), x, 100, 50, 50, null);
-	     	 drawAsteroids(g);
+	     	 manageAsteroids(g);
 	     	 
 	     	 
 	     	 x+=5;
@@ -73,10 +73,11 @@ public class Driver{
 	     }
 	}
 	
-	public static void drawAsteroids(Graphics g) {
+	public static void manageAsteroids(Graphics g) {
 		if(asteroids==null) return;
 		for(int i = 0; i<asteroids.size(); i++) {
 			asteroids.get(i).draw(g);
+			asteroids.get(i).move();
 		}
 	}
 
