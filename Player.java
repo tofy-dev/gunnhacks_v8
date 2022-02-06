@@ -22,7 +22,7 @@ public class Player extends Movable implements KeyListener{
 	
 	public Player(int tx, int ty, int width, int height, int speed, JPanel panel) {
 		super(tx, ty, (int) (Math.cos(0)*speed), (int)(Math.sin(0)*speed), width, height, panel);
-		this.dir = Math.PI/2;
+		this.dir = 0;
 		this.speed = speed;
 		
 		try {
@@ -67,8 +67,8 @@ public class Player extends Movable implements KeyListener{
 	
 	@Override
 	public void move() {
-		setDx((int) (Math.cos(dir)*speed));
-		setDy((int) (Math.sin(dir)*speed));
+		setDx((int) (Math.cos(dir-Math.PI/2)*speed));
+		setDy((int) (Math.sin(dir-Math.PI/2)*speed));
 		
 		System.out.println("dx: " + getDx() + ", dy: " + getDy());
 		
