@@ -53,6 +53,10 @@ public abstract class Movable{
 	public int getDy(){
 		return dy;
 	}
+	
+	public JPanel getPanel() {
+		return panel;
+	}
 
 	public abstract int getType();
 	
