@@ -25,6 +25,7 @@ public class Player extends Movable implements KeyListener {
 	private boolean leftPressed = false;
 	private boolean rightPressed = false;
 	private long cooldown = System.currentTimeMillis();
+	private boolean isDown = false;
 
 	public Player(int tx, int ty, int width, int height, int speed, JPanel panel) {
 		super(tx, ty, (int) (Math.cos(0) * speed), (int) (Math.sin(0) * speed), width, height, panel);
@@ -150,6 +151,10 @@ public class Player extends Movable implements KeyListener {
 
 	@Override
 	public void keyTyped(KeyEvent e) {
+		int typed = e.getKeyCode();
+		if (typed == KeyEvent.VK_DOWN) {
+			shoot();
+		}
 	}
 
 	@Override
@@ -164,10 +169,12 @@ public class Player extends Movable implements KeyListener {
 			leftPressed = true;
 		} else if (typed == KeyEvent.VK_RIGHT) {
 			rightPressed = true;
-		} else if (typed == KeyEvent.VK_DOWN) {
-			downPressed = true;
 		} else if (typed == KeyEvent.VK_UP) {
 			upPressed = true;
+		}
+		
+		if (typed == KeyEvent.VK_DOWN) {
+			isDown = true;
 		}
 	}
 
@@ -178,10 +185,11 @@ public class Player extends Movable implements KeyListener {
 			leftPressed = false;
 		} else if (typed == KeyEvent.VK_RIGHT) {
 			rightPressed = false;
-		} else if (typed == KeyEvent.VK_DOWN) {
-			downPressed = false;
 		} else if (typed == KeyEvent.VK_UP) {
 			upPressed = false;
+		}
+		if(isDown == true) {
+			shoot();
 		}
 	}
 
@@ -189,14 +197,14 @@ public class Player extends Movable implements KeyListener {
 //		int r = getWidth()/2;
 //		int nX = getX() + getWidth()/2 + (int) (r * Math.cos(dir));
 //		int nY = getY() - getHeight()/2 + (int) (r * Math.sin(dir));
-		if (System.currentTimeMillis() - cooldown >= 1000) {
+		if (System.currentTimeMillis() - cooldown >= 200) {
 			int r = getWidth() / 2;
 
 			double tDir = dir - Math.PI / 2;
 
 			int nX = getX() + getWidth() / 2 + (int) (r * Math.cos(tDir));
 			int nY = getY() + getHeight() / 2 + (int) (r * Math.sin(tDir));
-			Driver.getLasers().add(new Laser(nX, nY, 10, 5, dir, 8, getPanel()));
+			Driver.getLasers().add(new Laser(nX, nY, 10, 5, dir, 10, getPanel()));
 			cooldown = System.currentTimeMillis();
 		}
 	}
