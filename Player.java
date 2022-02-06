@@ -287,13 +287,13 @@ public class Player extends Movable implements KeyListener {
 			}
 			int nX = getX() + getWidth() / 2 + (int) (r * Math.cos(tDir));
 			int nY = getY() + getHeight() / 2 + (int) (r * Math.sin(tDir));
-			Driver.getLasers().add(new Laser(nX, nY, 20, 5, dir, 10, getPanel()));
+			Driver.getLasers().add(new Laser(nX, nY, 10, 10, dir, 10, getPanel()));
 			laserCooldown = System.currentTimeMillis();
 		}
 	}
 	
 	public void shootMissile() {
-		if (System.currentTimeMillis() - missileCooldown >= 1000) {
+		if (System.currentTimeMillis() - missileCooldown >= 5000) {
 			int r = getWidth() / 2;
 
 			double tDir = dir - Math.PI / 2;
@@ -303,7 +303,7 @@ public class Player extends Movable implements KeyListener {
 			}
 			int nX = getX() + getWidth() / 2 + (int) (r * Math.cos(tDir));
 			int nY = getY() + getHeight() / 2 + (int) (r * Math.sin(tDir));
-			Driver.getLasers().add(new Missile(nX, nY, 20, 5, dir, 10, getPanel()));
+			Driver.getLasers().add(new Missile(nX, nY, 10, 10, dir, 10, getPanel()));
 			missileCooldown = System.currentTimeMillis();
 		}
 	}
