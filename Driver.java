@@ -76,7 +76,7 @@ public class Driver {
 		private int x = 5;
 
 		protected void paintComponent(Graphics g) {
-			if(asteroids != null && asteroids.size() <= 1) {
+			if(!spawnOnce && asteroids != null && asteroids.size() <= 1) {
 				spawnAsteroids();
 			}
 			if(spawnOnce && System.currentTimeMillis() - astCooldown >= 1000) {
