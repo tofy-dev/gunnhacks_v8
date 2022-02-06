@@ -32,8 +32,11 @@ public class Player extends Movable{
 	
 	@Override
 	public void wasHit(Movable hitter) {
-		numLives --;
-		// flashing maybe?, or remove, wait 0.5 seconds, and then reappear?
+		// Because the player shot the laser
+		if(!hitter.getClass().equals(Laser.class)) {
+			numLives --;
+			// flashing maybe?, or remove, wait 0.5 seconds, and then reappear?
+		}
 		
 	}
 
