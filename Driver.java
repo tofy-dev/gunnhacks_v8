@@ -16,7 +16,7 @@ public class Driver{
 	
 	public static void main(String[] args) {
 		
-		frame = new JFrame("'Sup?");
+		frame = new JFrame("AstBlast");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setBounds(0, 0, 700, 700);
 		
@@ -47,7 +47,7 @@ public class Driver{
 		g.setColor(Color.BLACK);
 		
 		asteroids = new ArrayList<Asteroids>();
-		asteroids.add(new Asteroids(100, 100, 1, -2, 50, panel));
+		asteroids.add(new Asteroids(100, 100, 1, -2, 50, panel, asteroids));
 		while(true) {
 			try {
 				Thread.sleep(30);

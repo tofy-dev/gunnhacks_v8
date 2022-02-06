@@ -16,6 +16,12 @@ public class Laser extends Movable{
 		super.move();
 		if(panel.)
 	}
+
+	@Override
+	public void notifyIfHit(Movable hitter) {
+		
+		
+	}
 	
 
 }

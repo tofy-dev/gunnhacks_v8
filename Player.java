@@ -1,11 +1,13 @@
+import java.util.ArrayList;
+
 import javax.swing.JPanel;
 
 public class Player extends Movable{
 	
-	int angle = 0;
-	int numLives = 3;
-	public Player(int tx, int ty, int tdx, int tdy, int width, int height, JPanel panel) {
-		super(tx, ty, tdx, tdy, width, height, panel);
+	private int angle = 0;
+	private int numLives = 3;
+	public Player(int tx, int ty, int tdx, int tdy, int width, int height, JPanel panel, ArrayList<Asteroids> arr) {
+		super(tx, ty, tdx, tdy, width, height, panel, arr);
 	}
 	
 	public void setAngle(int z) {
@@ -26,6 +28,12 @@ public class Player extends Movable{
 	
 	public int getType() {
 		return 1;
+	}
+
+	@Override
+	public void notifyIfHit(Movable hitter) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }

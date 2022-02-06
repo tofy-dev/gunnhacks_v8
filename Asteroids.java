@@ -1,13 +1,14 @@
 import java.awt.Graphics;
+import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
 public class Asteroids extends Movable{
 	
-	int radius;
-	public Asteroids(int tx, int ty, int tdx, int tdy, int tradius, JPanel panel) {
-		super(tx,ty,tdx,tdy, 2*tradius, 2*tradius, panel);
+	private int radius;
+	public Asteroids(int tx, int ty, int tdx, int tdy, int tradius, JPanel panel, ArrayList<Asteroids> arr) {
+		super(tx,ty,tdx,tdy, 2*tradius, 2*tradius, panel, arr);
 		radius = tradius;
 	}
 	
@@ -35,6 +36,13 @@ public class Asteroids extends Movable{
 	@Override
 	public void draw(Graphics g) {
 		g.drawImage(new ImageIcon("sprites/asteroid.png").getImage(), getX(), getY(), radius/2, radius/2, null);
+	}
+
+
+	@Override
+	public void notifyIfHit(Movable hitter) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	
