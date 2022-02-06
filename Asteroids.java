@@ -48,6 +48,8 @@ public class Asteroids extends Movable{
 				getAsteroids().add(a);
 				Asteroids b = new Asteroids(getX(), getY(), -getDx(), -getDy(), radius/2, getPanel(), getAsteroids());
 				getAsteroids().add(b);
+				a.draw(getPanel().getGraphics());
+				b.draw(getPanel().getGraphics());
 			}else {
 				remove();
 			}
