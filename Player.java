@@ -29,7 +29,9 @@ public class Player extends Movable implements KeyListener {
 	private boolean downPressed = false;
 	private boolean leftPressed = false;
 	private boolean rightPressed = false;
-	private long cooldown = System.currentTimeMillis();
+	private boolean slashPressed = false;
+	private long laserCooldown = System.currentTimeMillis();
+	private long missileCooldown = System.currentTimeMillis();
 	private double acceleration = 0.25;
 	private double deacceleration = 0.1;
 	
@@ -86,6 +88,10 @@ public class Player extends Movable implements KeyListener {
 	public boolean isRightPressed() {
 		return rightPressed;
 	}
+	
+	public boolean isSlashPressed() {
+		return slashPressed;
+	}
 
 	public void setdir(double z) {
 		dir = z;
@@ -127,7 +133,7 @@ public class Player extends Movable implements KeyListener {
 
 	@Override
 	public void move() {
-		if(isMoving() && speed<20) {
+		if(isMoving() && speed<15) {
 			speed+=acceleration;
 			acceleration += 0.0001;
 			deacceleration = DEFAULT_DEACCELERATION;
@@ -240,6 +246,8 @@ public class Player extends Movable implements KeyListener {
 			rightPressed = true;
 		} else if (typed == KeyEvent.VK_UP) {
 			upPressed = true;
+		}else if (typed == KeyEvent.VK_SLASH) {
+			slashPressed = true;
 		}
 
 		if (typed == KeyEvent.VK_DOWN) {
@@ -256,6 +264,8 @@ public class Player extends Movable implements KeyListener {
 			rightPressed = false;
 		} else if (typed == KeyEvent.VK_UP) {
 			upPressed = false;
+		}else if (typed == KeyEvent.VK_SLASH) {
+			slashPressed = false;
 		}
 		if (downPressed == true) {
 			downPressed = false;
@@ -267,7 +277,7 @@ public class Player extends Movable implements KeyListener {
 //		int r = getWidth()/2;
 //		int nX = getX() + getWidth()/2 + (int) (r * Math.cos(dir));
 //		int nY = getY() - getHeight()/2 + (int) (r * Math.sin(dir));
-		if (System.currentTimeMillis() - cooldown >= 300) {
+		if (System.currentTimeMillis() - laserCooldown >= 300) {
 			int r = getWidth() / 2;
 
 			double tDir = dir - Math.PI / 2;
@@ -277,8 +287,24 @@ public class Player extends Movable implements KeyListener {
 			}
 			int nX = getX() + getWidth() / 2 + (int) (r * Math.cos(tDir));
 			int nY = getY() + getHeight() / 2 + (int) (r * Math.sin(tDir));
-			Driver.getLasers().add(new Laser(nX, nY, 5, 5, dir, 10, getPanel()));
-			cooldown = System.currentTimeMillis();
+			Driver.getLasers().add(new Laser(nX, nY, 20, 5, dir, 10, getPanel()));
+			laserCooldown = System.currentTimeMillis();
+		}
+	}
+	
+	public void shootMissile() {
+		if (System.currentTimeMillis() - missileCooldown >= 1000) {
+			int r = getWidth() / 2;
+
+			double tDir = dir - Math.PI / 2;
+			if (!upPressed) {
+				setX(getX() - getDx());
+				setY(getY() - getDy());
+			}
+			int nX = getX() + getWidth() / 2 + (int) (r * Math.cos(tDir));
+			int nY = getY() + getHeight() / 2 + (int) (r * Math.sin(tDir));
+			Driver.getLasers().add(new Missile(nX, nY, 20, 5, dir, 10, getPanel()));
+			missileCooldown = System.currentTimeMillis();
 		}
 	}
 
