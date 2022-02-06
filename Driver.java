@@ -50,7 +50,10 @@ public class Driver{
 		g.setColor(Color.BLACK);
 		
 		asteroids = new ArrayList<Asteroids>();
-		asteroids.add(new Asteroids(100, 100, 1, -2, 50, panel));
+		for(int i = 0; i<10; i++){
+			asteroids.add(new Asteroids((int)(Math.random()*panel.getWidth()), 
+					(int)(Math.random()*panel.getHeight()), (int)(Math.random()*8)-4, (int)(Math.random()*8)-4, 50, panel));
+		}
 		
 		
 		player = new Player(350, 600, 50, 50, 6, panel);

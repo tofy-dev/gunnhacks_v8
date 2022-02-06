@@ -42,8 +42,8 @@ public class Asteroids extends Movable{
 	
 	@Override
 	public void wasHit(Movable hitter) {
-		System.out.println("was hit");
-		if(hitter.getType()==2 || hitter.getType() == 1) { // If hitter is a laser
+		//System.out.println("was hit");
+		if(hitter.getType()==2 || hitter.getType() == 1) { // If hitter is a laser or player
 			if(getRadius() >= 4) {
 				Asteroids a = new Asteroids(getX(), getY(), getDx(), getDy(), radius/2, getPanel());
 				Driver.getAsteroids().add(a);
