@@ -1,5 +1,6 @@
 import java.awt.Graphics;
 import java.awt.Rectangle;
+import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
@@ -13,14 +14,16 @@ public abstract class Movable{
 	private Rectangle hitBox;
 	
 	private JPanel panel;
+	private ArrayList<Asteroids> asteroids;
 	//private Graphics g;
 	
-	public Movable(int tx, int ty, int tdx, int tdy, int width, int height, JPanel panel) {
+	public Movable(int tx, int ty, int tdx, int tdy, int width, int height, JPanel panel, ArrayList<Asteroids> asteroids) {
 		x = tx;
 		y = ty;
 		dx = tdx;
 		dy = tdy;
 		this.panel = panel;
+		this.asteroids = asteroids;
 		hitBox = new Rectangle(x, y, width, height);
 		//g = panel.getGraphics();
 	}
@@ -71,31 +74,19 @@ public abstract class Movable{
 		g.drawImage(new ImageIcon("sprites/asteroid.png").getImage(), x, y, null);
 	}
 	
-	public void notifyIfHit() {
-		// implement later
-	}
+	public abstract void notifyIfHit(Movable hitter);
 	
 	public void remove() {
 		// implement later
 	}
 	
 	public void move() {
-		setX(getX() + getDx());
-		setY(getY() + getDy());
-		
-		if(getX() < 0) {
-			setX(getPanel().getWidth());
-		}
-		if(getY() < 0) {
-			setY(getPanel().getHeight());
-		}
-		if(getX() > getPanel().getWidth()) {
-			setX(0);
-		}
-		if(getY() > getPanel().getHeight()) {
-			setY(0);
-		}
+		x += dx;
+		y += dy;
 		hitBox.setLocation(x, y);
+		for(int i = 0; i<asteroids.size(); i++) {
+			asteroids.get(i).notifyIfHit(this);
+		}
 	}
 	
 	
