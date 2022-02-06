@@ -72,6 +72,10 @@ public abstract class Movable{
 		return height;
 	}
 	
+	public ArrayList<Asteroids> getAsteroids(){
+		return asteroids;
+	}
+	
 	
 	public JPanel getPanel() {
 		return panel;
@@ -87,11 +91,12 @@ public abstract class Movable{
 		g.drawImage(new ImageIcon("sprites/asteroid.png").getImage(), x, y, null);
 	}
 	
-	public abstract void notifyIfHit(Movable hitter);
-	
-	public void remove() {
-		// implement later
+	public void notifyIfHit(Movable hitter) {
+		hitter.wasHit(this);
+		this.wasHit(hitter);
 	}
+	
+	public abstract void remove();
 	
 	public void move() {
 		x += dx;
@@ -115,6 +120,8 @@ public abstract class Movable{
 			asteroids.get(i).notifyIfHit(this);
 		}
 	}
+	
+	public abstract void wasHit(Movable hitter);
 	
 	
 	

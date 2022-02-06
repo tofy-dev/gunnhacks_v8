@@ -29,6 +29,7 @@ public class Asteroids extends Movable{
 		return 3;
 	}
 
+	@Override
 	public void remove(){
 
 	}
@@ -38,11 +39,19 @@ public class Asteroids extends Movable{
 		g.drawImage(new ImageIcon("sprites/asteroid.png").getImage(), getX(), getY(), radius/2, radius/2, null);
 	}
 
-
+	
 	@Override
-	public void notifyIfHit(Movable hitter) {
-		// TODO Auto-generated method stub
-		
+	public void wasHit(Movable hitter) {
+		if(!hitter.getClass().equals(Asteroids.class)) {
+			if(getRadius() >= 4) {
+				Asteroids a = new Asteroids(getX(), getY(), getDx(), getDy(), radius/2, getPanel(), getAsteroids());
+				getAsteroids().add(a);
+				Asteroids b = new Asteroids(getX(), getY(), -getDx(), -getDy(), radius/2, getPanel(), getAsteroids());
+				getAsteroids().add(b);
+			}else {
+				remove();
+			}
+		}
 	}
 	
 	

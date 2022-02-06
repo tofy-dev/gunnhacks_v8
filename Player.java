@@ -29,10 +29,17 @@ public class Player extends Movable{
 	public int getType() {
 		return 1;
 	}
+	
+	@Override
+	public void wasHit(Movable hitter) {
+		numLives --;
+		// flashing maybe?, or remove, wait 0.5 seconds, and then reappear?
+		
+	}
 
 	@Override
-	public void notifyIfHit(Movable hitter) {
-		// TODO Auto-generated method stub
+	public void remove() {
+		
 		
 	}
 	

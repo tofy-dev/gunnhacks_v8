@@ -19,7 +19,16 @@ public class Laser extends Movable{
 
 	@Override
 	public void notifyIfHit(Movable hitter) {
+		// Call wasHit on hitter
+	}
+
+	@Override
+	public void remove() {
 		
+	}
+
+	@Override
+	public void wasHit() {
 		
 	}
 	
