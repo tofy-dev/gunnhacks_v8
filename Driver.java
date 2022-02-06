@@ -53,7 +53,10 @@ public class Driver{
 		asteroids.add(new Asteroids(100, 100, 1, -2, 50, panel));
 		
 		
-		player = new Player(350, 600, 50, 50, 5, Math.PI/2, panel);
+		player = new Player(350, 600, 50, 50, 5, panel);
+		panel.setFocusable(true);
+		panel.requestDefaultFocus();
+		
 		panel.addKeyListener(player);
 		
 		
