@@ -172,7 +172,7 @@ public class Player extends Movable implements KeyListener {
 		} else if (typed == KeyEvent.VK_UP) {
 			upPressed = true;
 		}
-		
+
 		if (typed == KeyEvent.VK_DOWN) {
 			isDown = true;
 		}
@@ -188,7 +188,8 @@ public class Player extends Movable implements KeyListener {
 		} else if (typed == KeyEvent.VK_UP) {
 			upPressed = false;
 		}
-		if(isDown == true) {
+		if (isDown == true) {
+			isDown = false;
 			shoot();
 		}
 	}
@@ -197,11 +198,14 @@ public class Player extends Movable implements KeyListener {
 //		int r = getWidth()/2;
 //		int nX = getX() + getWidth()/2 + (int) (r * Math.cos(dir));
 //		int nY = getY() - getHeight()/2 + (int) (r * Math.sin(dir));
-		if (System.currentTimeMillis() - cooldown >= 200) {
+		if (System.currentTimeMillis() - cooldown >= 300) {
 			int r = getWidth() / 2;
 
 			double tDir = dir - Math.PI / 2;
-
+			if (!upPressed) {
+				setX(getX() - getDx());
+				setY(getY() - getDy());
+			}
 			int nX = getX() + getWidth() / 2 + (int) (r * Math.cos(tDir));
 			int nY = getY() + getHeight() / 2 + (int) (r * Math.sin(tDir));
 			Driver.getLasers().add(new Laser(nX, nY, 10, 5, dir, 10, getPanel()));
