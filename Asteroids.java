@@ -52,8 +52,12 @@ public class Asteroids extends Movable{
 				Asteroids b = new Asteroids(getX(), getY(), -getDx(), -getDy(), 2*radius/3, getPanel());
 				Driver.getAsteroids().add(b);
 			}
-			
-			createCoin();
+			int x = (int)(Math.random()*30);
+			if(x == 1) {
+				createHeart();
+			}else{
+				createCoin();
+			}
 			remove();
 		}else if(hitter.getType() == 4) {
 			createCoin();
@@ -62,6 +66,11 @@ public class Asteroids extends Movable{
 //			setDx(0- getDx());
 //			setDy(0- getDy());
 		}
+	}
+	
+	public void createHeart() {
+		Heart heart = new Heart(getX(), getY(), getDx()/2, getDy()/2, 10, getPanel());
+		Driver.getHearts().add(heart);
 	}
 	
 	public void createCoin() {
