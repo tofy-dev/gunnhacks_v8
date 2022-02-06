@@ -93,19 +93,19 @@ public abstract class Movable{
 	public void move() {
 		setX(getX()+getDx());
 		setY(getY()+getDy());
-		if(getX() < -getWidth()/4) {
+		if(getX() + getWidth() < 0) {
 			setX(getPanel().getWidth() + getWidth()/4);
 			System.out.println("1");
 		}
-		if(getY() < -getHeight()/4) {
+		if(getY() + getHeight() < 0) {
 			setY(getPanel().getHeight() + getHeight()/4);
 			System.out.println("2");
 		}
-		if(getX() > getPanel().getWidth() + getWidth()/4) {
+		if(getX() > getPanel().getWidth() + getWidth()) {
 			setX( -getWidth()/4);
 			System.out.println("3");
 		}
-		if(getY() > getPanel().getHeight() + getHeight()/4) {
+		if(getY() > getPanel().getHeight() + getHeight()) {
 			setY( -getHeight()/4);
 			System.out.println("4");
 		}
