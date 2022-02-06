@@ -1,15 +1,25 @@
-public class Movable{
+import java.awt.Graphics;
+
+import javax.swing.ImageIcon;
+import javax.swing.JPanel;
+
+public abstract class Movable{
 	
-	// Not sure how to add the image and the Jpanel
-	int x;
-	int y;
-	int dx;
-	int dy;
-	public Movable(int tx, int ty, int tdx, int tdy) {
+	private int x;
+	private int y;
+	private int dx;
+	private int dy;
+	
+	private JPanel panel;
+	//private Graphics g;
+	
+	public Movable(int tx, int ty, int tdx, int tdy, JPanel panel) {
 		x = tx;
 		y = ty;
 		dx = tdx;
 		dy = tdy;
+		this.panel = panel;
+		//g = panel.getGraphics();
 	}
 	
 	public void setX(int z) {
@@ -44,13 +54,10 @@ public class Movable{
 		return dy;
 	}
 
-	public int getType() {
-		// subclasses will implement
-		return 0;
-	}
+	public abstract int getType();
 	
-	public void draw() {
-		//implement later
+	public void draw(Graphics g) {
+		g.drawImage(new ImageIcon("sprites/asteroid.png").getImage(), x, y, null);
 	}
 	
 	public void notifyIfHit() {

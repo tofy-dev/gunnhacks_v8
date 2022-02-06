@@ -1,8 +1,11 @@
+import javax.swing.ImageIcon;
+import javax.swing.JPanel;
+
 public class Asteroids extends Movable{
 	
 	int radius;
-	public Asteroids(int tx, int ty, int tdx, int tdy, int tradius) {
-		super(tx,ty,tdx,tdy);
+	public Asteroids(int tx, int ty, int tdx, int tdy, int tradius, JPanel panel) {
+		super(tx,ty,tdx,tdy, panel);
 		radius = tradius;
 	}
 	
@@ -24,6 +27,11 @@ public class Asteroids extends Movable{
 
 	public void remove(){
 
+	}
+	
+	@Override
+	public void draw(Graphics g) {
+		g.drawImage(new ImageIcon("sprites/asteroid.png").getImage(), getX(), getY(), radius/2, radius/2, null);
 	}
 	
 	
