@@ -97,20 +97,20 @@ public class Player extends Movable implements KeyListener {
 
 		setX(getX() + getDx());
 		setY(getY() + getDy());
-		if (getX() < -getWidth() / 4) {
+		if (getX() < -getWidth()) {
 			setX(getPanel().getWidth() + getWidth());
 			System.out.println("1");
 		}
-		if (getY() < -getHeight() / 4) {
+		if (getY() < -getHeight()) {
 			setY(getPanel().getHeight() + getHeight());
 			System.out.println("2");
 		}
 		if (getX() > getPanel().getWidth() + getWidth()) {
-			setX(-getWidth() / 4);
+			setX(-getWidth());
 			System.out.println("3");
 		}
 		if (getY() > getPanel().getHeight() + getHeight()) {
-			setY(-getHeight() / 4);
+			setY(-getHeight());
 			System.out.println("4");
 		}
 
