@@ -64,18 +64,7 @@ public class Driver{
 		
 		
 		while(true) {
-			if(player.isUpPressed()) {
-				player.move();
-			}
-			if(player.isDownPressed()) {
-				player.shoot();
-			}
-			if(player.isLeftPressed()) {
-				player.setdir(player.getdir() - 0.1);
-			}
-			if(player.isRightPressed()) {
-				player.setdir(player.getdir() + 0.1);;
-			}
+			
 			try {
 				Thread.sleep(30);
 			} catch (InterruptedException e) {
@@ -93,7 +82,7 @@ public class Driver{
 	         //g.setColor(Color.RED);
 	         managePlayer(g);
 	     	 manageAsteroids(g);
-	     	 
+	     	 manageLasers(g);
 	     	 
 	     	 x+=5;
 
@@ -119,13 +108,26 @@ public class Driver{
 	public static void managePlayer(Graphics g) {
 		if(player==null) return;
 		player.draw(g);
+		
+		if(player.isUpPressed()) {
+			player.move();
+		}
+		if(player.isDownPressed()) {
+			player.shoot();
+		}
+		if(player.isLeftPressed()) {
+			player.setdir(player.getdir() - 0.1);
+		}
+		if(player.isRightPressed()) {
+			player.setdir(player.getdir() + 0.1);;
+		}
 	}
 	
 	public static void manageLasers(Graphics g) {
 		if(lasers==null) return;
 		for(int i = 0; i<lasers.size(); i++) {
 			lasers.get(i).draw(g);
-			lasers.get(i).move();
+			//lasers.get(i).move();
 		}
 	}
 

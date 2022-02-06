@@ -135,12 +135,12 @@ public class Player extends Movable implements KeyListener{
 		double cos = Math.abs(Math.cos(Math.toRadians(dir)));
 		int rW = (int) Math.floor(image.getWidth()*cos + image.getHeight()*sin);
 		int rH = (int) Math.floor(image.getHeight()*cos + image.getWidth()*sin);
-		    BufferedImage rotated = new BufferedImage(rW, rH, image.getType());
-		    g2 = rotated.createGraphics();
-		    g2.translate((rW-image.getWidth())/2, (rH-image.getHeight())/2);
-		    g2.rotate(dir, image.getWidth()/2, image.getHeight()/2);
-		    g2.drawRenderedImage(image, null);
-		    g2.dispose();
+		BufferedImage rotated = new BufferedImage(rW, rH, image.getType());
+	    g2 = rotated.createGraphics();
+	    g2.translate((rW-image.getWidth())/2, (rH-image.getHeight())/2);
+	    g2.rotate(dir, image.getWidth()/2, image.getHeight()/2);
+	    g2.drawRenderedImage(image, null);
+	    g2.dispose();	
 		//g.drawImage(new ImageIcon("sprites/player.png").getImage(), getX(), getY(), (int)getHitBox().getWidth(), (int)getHitBox().getHeight(), null);
 		g.drawImage(rotated, getX(), getY(), (int)(getHitBox().getWidth()), (int)(getHitBox().getHeight()), null);
 	}
@@ -186,7 +186,11 @@ public class Player extends Movable implements KeyListener{
 	}
 	
 	public void shoot() {
-		Driver.getLasers().add(new Laser(getX(), getY(), 10, 5, dir, 8, getPanel()));
+		//int nX = (int) (getX() + getWidth()/2 * Math.cos(dir-Math.PI/2));
+		int nX = (int) (getX() + getWidth()*0.5 / Math.cos(dir+Math.PI/2));
+		//int nY = (int) (getY() + getHeight()/2 * Math.sin(dir-Math.PI/2));
+		int nY = (int) (getY() + getWidth()*0.5 / Math.sin(dir+Math.PI/2));
+		Driver.getLasers().add(new Laser(nX, nY, 10, 5, dir, 8, getPanel()));
 	}
 	
 	/*
