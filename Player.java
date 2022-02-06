@@ -25,8 +25,7 @@ public class Player extends Movable implements KeyListener {
 	private boolean leftPressed = false;
 	private boolean rightPressed = false;
 	private long cooldown = System.currentTimeMillis();
-	private boolean isDown = false;
-
+	
 	public Player(int tx, int ty, int width, int height, int speed, JPanel panel) {
 		super(tx, ty, (int) (Math.cos(0) * speed), (int) (Math.sin(0) * speed), width, height, panel);
 		this.dir = 0;
@@ -83,16 +82,25 @@ public class Player extends Movable implements KeyListener {
 		// Because the player shot the laser
 		if (!hitter.getClass().equals(Laser.class)) {
 			numLives--;
+			Driver.lostLife();
 			// flashing maybe?, or remove, wait 0.5 seconds, and then reappear?
 		}
 
+	}
+	
+	public boolean isMoving() {
+		//System.out.println(isDownPressed() || isUpPressed() || isLeftPressed() || isRightPressed());
+		return isDownPressed() || isUpPressed() || isLeftPressed() || isRightPressed();
 	}
 
 	@Override
 	public void move() {
 		setDx((int) (Math.cos(dir - Math.PI / 2) * speed));
 		setDy((int) (Math.sin(dir - Math.PI / 2) * speed));
-		//if((isDown)
+		if(!isMoving()) {
+			setDx(getDx()/2);
+			setDy(getDy()/2);
+		}
 
 		// System.out.println("dx: " + getDx() + ", dy: " + getDy());
 
@@ -130,7 +138,7 @@ public class Player extends Movable implements KeyListener {
 
 	@Override
 	public void remove() {
-		Driver.lostLife();
+		// Driver handles
 	}
 
 	@Override
@@ -175,7 +183,7 @@ public class Player extends Movable implements KeyListener {
 		}
 
 		if (typed == KeyEvent.VK_DOWN) {
-			isDown = true;
+			downPressed = true;
 		}
 	}
 
@@ -189,8 +197,8 @@ public class Player extends Movable implements KeyListener {
 		} else if (typed == KeyEvent.VK_UP) {
 			upPressed = false;
 		}
-		if (isDown == true) {
-			isDown = false;
+		if (downPressed == true) {
+			downPressed = false;
 			shoot();
 		}
 	}
