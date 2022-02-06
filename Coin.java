@@ -28,7 +28,7 @@ public class Coin extends Movable {
     }
 
     public void remove() {
-    	System.out.println(getValue());
+    	//System.out.println(getValue());
         Driver.updateScore(getValue());
         Driver.getCoins().remove(this);
     }

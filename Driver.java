@@ -79,7 +79,7 @@ public class Driver {
 		//System.out.println(1);
 		gameFrame = new JFrame();
 		gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		gameFrame.setBounds(0, 0, 700, 700);
+		gameFrame.setBounds(800, 0, 700, 700);
 		
 		button.setText("End Game");
 		
@@ -190,7 +190,7 @@ public class Driver {
 			spawnAsteroids(1);
 		}
 		
-		System.out.println(asteroids.size());
+		//System.out.println(asteroids.size());
 		for (int i = 0; i < asteroids.size(); i++) {
 			asteroids.get(i).draw(g);
 			asteroids.get(i).move();
