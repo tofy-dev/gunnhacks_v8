@@ -71,7 +71,7 @@ public class Driver {
 			}
 			panel.repaint();
 		}
-		drawGameOver(g2);
+		drawGameOver(g);
 	}
 
 	public static class Panel extends JPanel {
@@ -92,7 +92,6 @@ public class Driver {
 				
 				g.drawImage(new ImageIcon("sprites/background.jpg").getImage(), 0, 0, panel.getWidth(),
 						panel.getHeight(), null);
-				drawScore(g2);
 				// g.setColor(Color.RED);
 				if (player != null && player.getLives() <= 0) {
 					setGameOver(true);
@@ -100,7 +99,9 @@ public class Driver {
 				managePlayer(g);
 				manageAsteroids(g);
 				manageLasers(g);
-
+				
+				drawScore(g);
+				
 				x += 5;
 			} else {
 			}
@@ -172,14 +173,15 @@ public class Driver {
 		player.setY(panel.getHeight() / 2 - player.getHeight() / 2);
 	}
 
-	public static void drawGameOver(Graphics2D g) {
+	public static void drawGameOver(Graphics g) {
 		g.setColor(Color.GREEN);
 		g.setFont(new Font("Times", Font.BOLD, 80));
 		g.drawString("GAME OVER", 100, 350);
 	}
 	
-	public static void drawScore(Graphics2D g) {
-		g.setColor(Color.ORANGE);
+	public static void drawScore(Graphics g) {
+		if(g==null) return;
+		g.setColor(Color.RED);
 		g.setFont(new Font("Times", Font.BOLD, 80));
 		g.drawString("Score: " + score, 100, 100);
 	}
