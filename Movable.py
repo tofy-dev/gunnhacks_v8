@@ -69,4 +69,5 @@ class Movable:
 
     def move(self):
         self.x += self.dx
+        
         self.y += self.dy
