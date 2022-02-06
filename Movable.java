@@ -113,10 +113,17 @@ public abstract class Movable{
 		
 		hitBox.setLocation(x, y);
 		ArrayList<Asteroids> asteroids = Driver.getAsteroids();
+		Asteroids a;
+		int origSize = asteroids.size();
 		for(int i = 0; i<asteroids.size(); i++) {
-			if(getHitBox().intersects(asteroids.get(i).getHitBox()) && !asteroids.get(i).equals(this)) {
-				asteroids.get(i).notifyIfHit(this);
-				wasHit(asteroids.get(i));
+			a = asteroids.get(i);
+			if(getHitBox().intersects(a.getHitBox()) && !a.equals(this)) {
+				a.notifyIfHit(this);
+				wasHit(a);
+				if(asteroids.size()!=origSize) {
+					i--;
+					origSize--;
+				}
 			}
 		}
 	}
