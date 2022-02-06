@@ -96,12 +96,13 @@ public class Player extends Movable implements KeyListener {
 
 	@Override
 	public void move() {
+		if(isMoving() && speed<20) {
+			speed*=1.1;
+		}else {
+			speed*=0.3;
+		}
 		setDx((int) (Math.cos(dir - Math.PI / 2) * speed));
 		setDy((int) (Math.sin(dir - Math.PI / 2) * speed));
-		if(!isMoving()) {
-			setDx(getDx()/2);
-			setDy(getDy()/2);
-		}
 		// System.out.println("dx: " + getDx() + ", dy: " + getDy());
 
 		setX(getX() + getDx());
