@@ -2,8 +2,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 
@@ -23,11 +21,11 @@ public class Driver {
 	private static ArrayList<Heart> hearts;
 	private static Player player;
 	private static boolean isGameOver = false;
-	private static boolean spawnOnce = true;
+	// private static boolean spawnOnce = true;
 	private static int score = 0;
 	private static boolean shouldStartGame = false;
 
-	private static long astCooldown = System.currentTimeMillis();
+	// private static long astCooldown = System.currentTimeMillis();
 
 	public static void main(String[] args) {
 
@@ -131,8 +129,6 @@ public class Driver {
 
 	public static class Panel extends JPanel {
 
-		private int x = 5;
-
 		protected void paintComponent(Graphics g) {
 			
 			if(asteroids != null && asteroids.size() <= 1) {
@@ -155,8 +151,6 @@ public class Driver {
 				manageCoins(g);		
 				
 				drawText(g);
-				
-				x += 5;
 			}else {
 			}
 
