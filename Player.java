@@ -1,17 +1,13 @@
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
-import java.awt.image.ImageFilter;
-import java.awt.image.RGBImageFilter;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
 public class Player extends Movable implements KeyListener {
@@ -26,7 +22,7 @@ public class Player extends Movable implements KeyListener {
 	private BufferedImage hurtImage;
 
 	private boolean upPressed = false;
-	private boolean downPressed = false;
+	private boolean spacePressed = false;
 	private boolean leftPressed = false;
 	private boolean rightPressed = false;
 	private boolean slashPressed = false;
@@ -78,7 +74,7 @@ public class Player extends Movable implements KeyListener {
 	}
 
 	public boolean isDownPressed() {
-		return downPressed;
+		return spacePressed;
 	}
 
 	public boolean isLeftPressed() {
@@ -238,7 +234,7 @@ public class Player extends Movable implements KeyListener {
 	@Override
 	public void keyTyped(KeyEvent e) {
 		int typed = e.getKeyCode();
-		if (typed == KeyEvent.VK_DOWN) {
+		if (typed == KeyEvent.VK_SPACE) {
 			shoot();
 		}
 	}
@@ -261,8 +257,8 @@ public class Player extends Movable implements KeyListener {
 			slashPressed = true;
 		}
 
-		if (typed == KeyEvent.VK_DOWN) {
-			downPressed = true;
+		if (typed == KeyEvent.VK_SPACE) {
+			spacePressed = true;
 		}
 	}
 
@@ -278,8 +274,8 @@ public class Player extends Movable implements KeyListener {
 		}else if (typed == KeyEvent.VK_SLASH) {
 			slashPressed = false;
 		}
-		if (downPressed == true) {
-			downPressed = false;
+		if (spacePressed == true) {
+			spacePressed = false;
 			shoot();
 		}
 	}
