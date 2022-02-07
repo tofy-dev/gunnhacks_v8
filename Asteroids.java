@@ -1,5 +1,4 @@
 import java.awt.Graphics;
-import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;

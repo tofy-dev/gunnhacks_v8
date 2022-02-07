@@ -6,7 +6,6 @@ import javax.swing.JPanel;
 
 public class Heart extends Movable{
 
-	private int radius;
 	public Heart(int tx, int ty, int tdx, int tdy, int tradius, JPanel panel) {
 		super(tx,ty,tdx,tdy,tradius*2, tradius*2,panel);
 	}
